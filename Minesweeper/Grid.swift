@@ -41,7 +41,7 @@ struct GridFactory {
 
 struct MinesweeperGrid: Grid {
 
-    struct Point {
+    struct Point: Hashable, Equatable {
         let x: Int
         let y: Int
     }
@@ -99,6 +99,31 @@ struct MinesweeperGrid: Grid {
                 tile.content == .mine
             }
             .count
+    }
+    
+    private func findZeroesConnectedTo(x: Int, y: Int) -> Set<Point> {
+        var set = Set<Point>()
+        for point in adjacentPoints(x: x, y: y) {
+            if mineCount(x: point.x, y: point.y) == 0 {
+                set.insert(point)
+                if !set.contains(point) {
+                    set = set.union(findZeroesConnectedTo(x: point.x, y: point.y))
+                }
+            }
+        }
+        return set
+    }
+    
+    mutating func markSweep(x: Int, y: Int) {
+        let zeroes = findZeroesConnectedTo(x: x, y: y)
+        var newGrid = self
+        for point in zeroes {
+            newGrid[point.x, point.y].state = .exposed
+            for point in adjacentPoints(x: point.x, y: point.y) {
+                newGrid[point.x, point.y].state = .exposed
+            }
+        }
+        self = newGrid
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         GameView()
+            .background(.gray, ignoresSafeAreaEdges: .all)
     }
 }
 
@@ -18,20 +19,23 @@ struct GameView: View {
     let factory: GridFactory
     @State var scale: CGFloat = 1.0
     private let tileSize: CGFloat = 44
-
+    
     init(factory: GridFactory = .init()) {
         grid = factory.makeGrid(for: .default)
         self.factory = factory
     }
-
+    
     var body: some View {
         ScrollView([.horizontal, .vertical]) {
             GridView(grid: $grid) { x, y in
                 grid[x, y].state = .exposed
+                if grid.mineCount(x: x, y: y) == 0 {
+                    grid.markSweep(x: x, y: y)
+                }
             }
-                .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
-                .scaleEffect(x: scale, y: scale)
-                .frame(width: tileSize * CGFloat(grid.width) * scale, height: tileSize * CGFloat(grid.height) * scale)
+            .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
+            .scaleEffect(x: scale, y: scale)
+            .frame(width: tileSize * CGFloat(grid.width) * scale, height: tileSize * CGFloat(grid.height) * scale)
         }
         .gesture(
             MagnificationGesture()
@@ -41,7 +45,7 @@ struct GameView: View {
                 }
         )
     }
-
+    
     func newGrid() {
         grid = factory.makeGrid(for: .default)
     }
@@ -50,7 +54,7 @@ struct GameView: View {
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     let onSelect: (Int, Int) -> Void
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(0..<grid.height, id: \.self) { y in
@@ -72,10 +76,10 @@ struct GridView: View {
 struct TileView: View {
     let tile: MinesweeperTile
     let mineCount: Int
-
+    
     var body: some View {
         Rectangle()
-            .fill(.clear)
+            .fill(.gray)
             .border(.black, width: 1)
             .overlay {
                 switch tile.state {
@@ -86,7 +90,25 @@ struct TileView: View {
                     case .mine:
                         Text("💣")
                     case .empty:
-                        Text("\(mineCount)")
+                        if mineCount == 0 {
+                            EmptyView()
+                        } else if mineCount == 1 {
+                            Text("\(mineCount)")
+                                .bold()
+                                .foregroundColor(.blue)
+                        } else if mineCount == 2 {
+                            Text("\(mineCount)")
+                                .bold()
+                                .foregroundColor(.green)
+                        } else if mineCount == 3 {
+                            Text("\(mineCount)")
+                                .bold()
+                                .foregroundColor(.red)
+                        } else {
+                            Text("\(mineCount)")
+                                .bold()
+                                .foregroundColor(.purple)
+                        }
                     }
                 case .flagged:
                     Text("🚩")
