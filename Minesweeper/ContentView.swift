@@ -26,7 +26,9 @@ struct GameView: View {
 
     var body: some View {
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid)
+            GridView(grid: $grid) { x, y in
+                grid[x, y].state = .exposed
+            }
                 .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: tileSize * CGFloat(grid.width) * scale, height: tileSize * CGFloat(grid.height) * scale)
@@ -47,13 +49,19 @@ struct GameView: View {
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
+    let onSelect: (Int, Int) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(0..<grid.height, id: \.self) { y in
                 HStack(spacing: 0) {
                     ForEach(0..<grid.width, id: \.self) { x in
-                        TileView(tile: grid[x, y])
+                        Button {
+                            onSelect(x, y)
+                        } label: {
+                            TileView(tile: grid[x, y], mineCount: grid.mineCount(x: x, y: y))
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -63,17 +71,27 @@ struct GridView: View {
 
 struct TileView: View {
     let tile: MinesweeperTile
+    let mineCount: Int
 
     var body: some View {
         Rectangle()
             .fill(.clear)
             .border(.black, width: 1)
             .overlay {
-                switch tile.content {
-                case .mine:
-                    Text("💣")
-                case .empty:
-                    EmptyView()
+                switch tile.state {
+                case .hidden:
+                    Text("?")
+                case .exposed:
+                    switch tile.content {
+                    case .mine:
+                        Text("💣")
+                    case .empty:
+                        Text("\(mineCount)")
+                    }
+                case .flagged:
+                    Text("🚩")
+                case .questionMark:
+                    Text("?")
                 }
             }
     }

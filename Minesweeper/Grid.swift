@@ -40,6 +40,12 @@ struct GridFactory {
 }
 
 struct MinesweeperGrid: Grid {
+
+    struct Point {
+        let x: Int
+        let y: Int
+    }
+
     typealias Tile = MinesweeperTile
 
     let width: Int
@@ -59,6 +65,36 @@ struct MinesweeperGrid: Grid {
         set(newValue) {
             grid[y * width + x] = newValue
         }
+    }
+
+    private func isInBounds(x: Int, y: Int) -> Bool {
+        return x >= 0 && x < width &&
+               y >= 0 && y < height
+    }
+
+    func adjacent(x: Int, y: Int) -> [Point] {
+        var result: [Point] = []
+        for relX in (-1...1) {
+            for relY in (-1...1) {
+                let absX = x + relX
+                let absY = y + relY
+                if !(relX == 0 && relY == 0) && isInBounds(x: absX, y: absY) {
+                    result.append(Point(x: absX, y: absY))
+                }
+            }
+        }
+        return result
+    }
+
+    func mineCount(x: Int, y: Int) -> Int {
+        adjacent(x: x, y: y)
+            .map { point -> Tile in
+                self[point.x, point.y]
+            }
+            .filter { tile in
+                tile.content == .mine
+            }
+            .count
     }
 }
 
