@@ -72,7 +72,7 @@ struct MinesweeperGrid: Grid {
                y >= 0 && y < height
     }
 
-    func adjacent(x: Int, y: Int) -> [Point] {
+    func adjacentPoints(x: Int, y: Int) -> [Point] {
         var result: [Point] = []
         for relX in (-1...1) {
             for relY in (-1...1) {
@@ -86,11 +86,15 @@ struct MinesweeperGrid: Grid {
         return result
     }
 
-    func mineCount(x: Int, y: Int) -> Int {
-        adjacent(x: x, y: y)
-            .map { point -> Tile in
+    func adjacentTiles(x: Int, y: Int) -> [Tile] {
+        adjacentPoints(x: x, y: y)
+            .map { point in
                 self[point.x, point.y]
             }
+    }
+
+    func mineCount(x: Int, y: Int) -> Int {
+        adjacentTiles(x: x, y: y)
             .filter { tile in
                 tile.content == .mine
             }
