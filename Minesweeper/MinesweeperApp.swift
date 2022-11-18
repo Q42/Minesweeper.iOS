@@ -11,7 +11,9 @@ import SwiftUI
 struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }
         }
     }
 }
