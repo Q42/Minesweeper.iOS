@@ -12,7 +12,7 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView()
+                ContentView().navigationTitle("MineSweeper")
             }
         }
     }

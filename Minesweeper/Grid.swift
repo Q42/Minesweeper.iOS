@@ -19,7 +19,7 @@ struct GameConfiguration {
     let height: Int
     let minesCount: Int
 
-    static let `default` = GameConfiguration(width: 9, height: 9, minesCount: 10)
+    static let `default` = GameConfiguration(width: 9, height: 14, minesCount: 25)
 }
 
 struct GridFactory {
@@ -101,13 +101,14 @@ struct MinesweeperGrid: Grid {
             .count
     }
     
-    private func findZeroesConnectedTo(x: Int, y: Int) -> Set<Point> {
-        var set = Set<Point>()
+    private func findZeroesConnectedTo(x: Int, y: Int, newSet:Set<Point>) -> Set<Point> {
+        var set = Set<Point>();
+        set = set.union(newSet);
         for point in adjacentPoints(x: x, y: y) {
-            if mineCount(x: point.x, y: point.y) == 0 {
-                set.insert(point)
+            if mineCount(x: point.x, y: point.y) == 0 && self[point.x, point.y].content != .mine {
                 if !set.contains(point) {
-                    set = set.union(findZeroesConnectedTo(x: point.x, y: point.y))
+                    set.insert(point)
+                    set = set.union(findZeroesConnectedTo(x: point.x, y: point.y, newSet: set))
                 }
             }
         }
@@ -115,7 +116,8 @@ struct MinesweeperGrid: Grid {
     }
     
     mutating func markSweep(x: Int, y: Int) {
-        let zeroes = findZeroesConnectedTo(x: x, y: y)
+        let zeroes = findZeroesConnectedTo(x: x, y: y, newSet:Set<Point>())
+        print(zeroes)
         var newGrid = self
         for point in zeroes {
             newGrid[point.x, point.y].state = .exposed
@@ -124,6 +126,10 @@ struct MinesweeperGrid: Grid {
             }
         }
         self = newGrid
+    }
+    
+    mutating func mineSelected(x: Int, y: Int) -> Bool {
+        return self[x,y].content == .mine
     }
 }
 

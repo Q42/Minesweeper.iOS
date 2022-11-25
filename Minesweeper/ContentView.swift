@@ -29,6 +29,9 @@ struct GameView: View {
         ScrollView([.horizontal, .vertical]) {
             GridView(grid: $grid) { x, y in
                 grid[x, y].state = .exposed
+                if grid.mineSelected(x: x, y: y) {
+                    print("BOOM!")
+                }
                 if grid.mineCount(x: x, y: y) == 0 {
                     grid.markSweep(x: x, y: y)
                 }
@@ -84,36 +87,22 @@ struct TileView: View {
             .overlay {
                 switch tile.state {
                 case .hidden:
-                    Text("?")
+                    Image("Covered").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
                 case .exposed:
                     switch tile.content {
                     case .mine:
-                        Text("💣")
+                        Image("Bomb").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
                     case .empty:
                         if mineCount == 0 {
-                            EmptyView()
-                        } else if mineCount == 1 {
-                            Text("\(mineCount)")
-                                .bold()
-                                .foregroundColor(.blue)
-                        } else if mineCount == 2 {
-                            Text("\(mineCount)")
-                                .bold()
-                                .foregroundColor(.green)
-                        } else if mineCount == 3 {
-                            Text("\(mineCount)")
-                                .bold()
-                                .foregroundColor(.red)
+                            Image("Uncovered").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
                         } else {
-                            Text("\(mineCount)")
-                                .bold()
-                                .foregroundColor(.purple)
+                            Image(String(mineCount)).interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
                         }
                     }
                 case .flagged:
-                    Text("🚩")
+                    Image("Flag")
                 case .questionMark:
-                    Text("?")
+                    Image("Questionmark")
                 }
             }
     }
