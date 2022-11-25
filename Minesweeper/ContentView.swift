@@ -43,8 +43,7 @@ struct ContentView: View {
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     let onSelect: (Int, Int) -> Void
-    let borderWidth: CGFloat = 2
-    let borderColor = Color("borderColor")
+    let borderWidth: CGFloat = 0
     
     var body: some View {
         Grid(horizontalSpacing: borderWidth, verticalSpacing: borderWidth) {
@@ -61,8 +60,7 @@ struct GridView: View {
                 }
             }
         }
-        .background(borderColor)
-        .border(borderColor, width: borderWidth)
+        .background(.gray)
         .font(.title)
     }
 }
