@@ -8,21 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        GameView()
-            .background(.gray, ignoresSafeAreaEdges: .all)
-    }
-}
-
-struct GameView: View {
     @State var grid: MinesweeperGrid
-    let factory: GridFactory
     @State var scale: CGFloat = 1.0
     private let tileSize: CGFloat = 44
     
-    init(factory: GridFactory = .init()) {
-        grid = factory.makeGrid(for: .default)
-        self.factory = factory
+    init(grid: MinesweeperGrid) {
+        self.grid = grid
     }
     
     var body: some View {
@@ -43,25 +34,22 @@ struct GameView: View {
         .gesture(
             MagnificationGesture()
                 .onChanged { value in
-                    print(value)
                     scale = value
                 }
         )
-    }
-    
-    func newGrid() {
-        grid = factory.makeGrid(for: .default)
     }
 }
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     let onSelect: (Int, Int) -> Void
+    let borderWidth: CGFloat = 2
+    let borderColor = Color("borderColor")
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        Grid(horizontalSpacing: borderWidth, verticalSpacing: borderWidth) {
             ForEach(0..<grid.height, id: \.self) { y in
-                HStack(spacing: 0) {
+                GridRow {
                     ForEach(0..<grid.width, id: \.self) { x in
                         Button {
                             onSelect(x, y)
@@ -73,6 +61,9 @@ struct GridView: View {
                 }
             }
         }
+        .background(borderColor)
+        .border(borderColor, width: borderWidth)
+        .font(.title)
     }
 }
 
@@ -83,7 +74,6 @@ struct TileView: View {
     var body: some View {
         Rectangle()
             .fill(.gray)
-            .border(.black, width: 1)
             .overlay {
                 switch tile.state {
                 case .hidden:
@@ -109,7 +99,9 @@ struct TileView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static let factory = RandomGridFactory(seed: "hakvoort!".data(using: .utf8))
+
     static var previews: some View {
-        ContentView()
+        ContentView(grid: factory.makeGrid(for: .beginner))
     }
 }

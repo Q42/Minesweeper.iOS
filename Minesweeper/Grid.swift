@@ -7,30 +7,53 @@
 //
 
 import Foundation
-
-protocol Grid {
-    associatedtype Tile
-//    init(width: Int, height: Int)
-    subscript(x: Int, y: Int) -> Tile { get set }
-}
+import GameKit
 
 struct GameConfiguration {
     let width: Int
     let height: Int
     let minesCount: Int
 
-    static let `default` = GameConfiguration(width: 9, height: 14, minesCount: 25)
+    private init(width: Int, height: Int, minesCount: Int) {
+        self.width = width
+        self.height = height
+        self.minesCount = minesCount
+    }
+
+    static let beginner = GameConfiguration(width: 9, height: 9, minesCount: 10)
+    static let intermediate = GameConfiguration(width: 16, height: 16, minesCount: 40)
+    static let expert = GameConfiguration(width: 30, height: 16, minesCount: 99)
+    static func custom(width: Int, height: Int, minesCount: Int) -> GameConfiguration {
+        .init(width: width, height: height, minesCount: minesCount)
+    }
 }
 
-struct GridFactory {
+protocol GridFactory {
+    func makeGrid(for configuration: GameConfiguration) -> MinesweeperGrid
+}
+
+struct RandomGridFactory: GridFactory {
+    private let randomSource: GKRandomSource
+
+    init(seed: Data? = nil) {
+        if let seed {
+            randomSource = GKARC4RandomSource(seed: seed)
+        } else {
+            randomSource = GKARC4RandomSource()
+        }
+    }
+
     func makeGrid(for configuration: GameConfiguration) -> MinesweeperGrid {
         let size = configuration.width * configuration.height
         let emptyCount = size - configuration.minesCount
 
         let mine = MinesweeperTile(state: .hidden, content: .mine)
         let empty = MinesweeperTile(state: .hidden, content: .empty)
-        var grid: [MinesweeperGrid.Tile] = Array(repeating: mine, count: configuration.minesCount) + Array(repeating: empty, count: emptyCount)
-        grid.shuffle()
+
+        var grid: [MinesweeperTile] = Array(repeating: mine, count: configuration.minesCount) + Array(repeating: empty, count: emptyCount)
+        if let shuffled = randomSource.arrayByShufflingObjects(in: grid) as? [MinesweeperTile] {
+            grid = shuffled
+        }
         return MinesweeperGrid(
             width: configuration.width,
             height: configuration.height,
@@ -39,7 +62,7 @@ struct GridFactory {
     }
 }
 
-struct MinesweeperGrid: Grid {
+struct MinesweeperGrid {
 
     struct Point: Hashable, Equatable {
         let x: Int
@@ -67,11 +90,13 @@ struct MinesweeperGrid: Grid {
         }
     }
 
+    /// Checks whether a point is within the grid.
     private func isInBounds(x: Int, y: Int) -> Bool {
         return x >= 0 && x < width &&
                y >= 0 && y < height
     }
 
+    /// Gets the points directly adjacent to a point.
     func adjacentPoints(x: Int, y: Int) -> [Point] {
         var result: [Point] = []
         for relX in (-1...1) {
@@ -86,6 +111,7 @@ struct MinesweeperGrid: Grid {
         return result
     }
 
+    /// Gets the tiles directly adjacent to a point.
     func adjacentTiles(x: Int, y: Int) -> [Tile] {
         adjacentPoints(x: x, y: y)
             .map { point in
@@ -93,6 +119,7 @@ struct MinesweeperGrid: Grid {
             }
     }
 
+    /// Gets the total number of mines that are adjacent to a point.
     func mineCount(x: Int, y: Int) -> Int {
         adjacentTiles(x: x, y: y)
             .filter { tile in
@@ -100,10 +127,10 @@ struct MinesweeperGrid: Grid {
             }
             .count
     }
-    
-    private func findZeroesConnectedTo(x: Int, y: Int, newSet:Set<Point>) -> Set<Point> {
-        var set = Set<Point>();
-        set = set.union(newSet);
+
+    /// Recursively finds all the points that are zero which are connected to the given point.
+    private func findZeroesConnectedTo(x: Int, y: Int, newSet: Set<Point> = Set()) -> Set<Point> {
+        var set = newSet
         for point in adjacentPoints(x: x, y: y) {
             if mineCount(x: point.x, y: point.y) == 0 && self[point.x, point.y].content != .mine {
                 if !set.contains(point) {
@@ -114,7 +141,8 @@ struct MinesweeperGrid: Grid {
         }
         return set
     }
-    
+
+    /// Exposes all adjacent points to the given point that are zero, and then repeats the process for those points.
     mutating func markSweep(x: Int, y: Int) {
         let zeroes = findZeroesConnectedTo(x: x, y: y, newSet:Set<Point>())
         print(zeroes)
