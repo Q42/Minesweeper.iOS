@@ -57,6 +57,7 @@
       "size" : "512x512"
     },
     {
+      "filename" : "Minesweeper watchOS.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
