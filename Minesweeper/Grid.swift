@@ -26,6 +26,7 @@ struct GameConfiguration {
     static func custom(width: Int, height: Int, minesCount: Int) -> GameConfiguration {
         .init(width: width, height: height, minesCount: minesCount)
     }
+    static let `default` = GameConfiguration.beginner
 }
 
 protocol GridFactory {

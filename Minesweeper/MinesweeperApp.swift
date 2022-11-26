@@ -9,29 +9,41 @@ import SwiftUI
 
 @main
 struct MinesweeperApp: App {
-    let gridFactory = RandomGridFactory()
-    let config: GameConfiguration = .custom(width: 30, height: 16, minesCount: 50)
+    let gridFactory: GridFactory
+    @State var grid: MinesweeperGrid
+
+    init() {
+        let gridFactory = RandomGridFactory()
+        let config = GameConfiguration.default
+        let grid = gridFactory.makeGrid(for: config)
+        self.gridFactory = gridFactory
+        self._grid = .init(initialValue: grid)
+    }
 
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView(grid: gridFactory.makeGrid(for: config))
+                ContentView(grid: $grid)
             }
         }
         .commands {
             CommandGroup(replacing: .newItem) {
                 Menu("New game") {
                     Button("Beginner") {
-                        //
+                        newGame(for: .beginner)
                     }
                     Button("Intermediate") {
-                        //
+                        newGame(for: .intermediate)
                     }
                     Button("Expert") {
-                        //
+                        newGame(for: .expert)
                     }
                 }
             }
         }
+    }
+
+    func newGame(for configuraton: GameConfiguration) {
+        grid = gridFactory.makeGrid(for: configuraton)
     }
 }

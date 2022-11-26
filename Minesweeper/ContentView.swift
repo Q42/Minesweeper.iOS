@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var grid: MinesweeperGrid
-    @State var scale: CGFloat = 1.0
+    @Binding var grid: MinesweeperGrid
+    @State private var scale: CGFloat = 1.0
     private let tileSize: CGFloat = 44
     
-    init(grid: MinesweeperGrid) {
-        self.grid = grid
-    }
-    
     var body: some View {
+        let width = tileSize * CGFloat(grid.width)
+        let height = tileSize * CGFloat(grid.height)
+
         ScrollView([.horizontal, .vertical]) {
             GridView(grid: $grid) { x, y in
                 grid[x, y].state = .exposed
@@ -27,10 +26,17 @@ struct ContentView: View {
                     grid.markSweep(x: x, y: y)
                 }
             }
-            .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
+            .frame(width: width, height: height)
             .scaleEffect(x: scale, y: scale)
-            .frame(width: tileSize * CGFloat(grid.width) * scale, height: tileSize * CGFloat(grid.height) * scale)
+            .frame(width: width * scale, height: height * scale)
         }
+        #if os(macOS)
+        // Set window size
+        .frame(
+            minWidth: width, idealWidth: width, maxWidth: .infinity,
+            minHeight: height, idealHeight: height, maxHeight: .infinity
+        )
+        #endif
         .gesture(
             MagnificationGesture()
                 .onChanged { value in
@@ -96,8 +102,9 @@ struct TileView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static let factory = RandomGridFactory(seed: "hakvoort!".data(using: .utf8))
+    @State static var grid = factory.makeGrid(for: .beginner)
 
     static var previews: some View {
-        ContentView(grid: factory.makeGrid(for: .beginner))
+        ContentView(grid: $grid)
     }
 }
