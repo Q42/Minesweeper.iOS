@@ -17,15 +17,8 @@ struct ContentView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid) { x, y in
-                grid[x, y].state = .exposed
-                if grid.mineSelected(x: x, y: y) {
-                    print("BOOM!")
-                }
-                if grid.mineCount(x: x, y: y) == 0 {
-                    grid.markSweep(x: x, y: y)
-                }
-            }
+            GridView(grid: $grid)
+            .disabled(grid.isGameOver)
             .frame(width: width, height: height)
             .scaleEffect(x: scale, y: scale)
             .frame(width: width * scale, height: height * scale)
@@ -48,35 +41,37 @@ struct ContentView: View {
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
-    let onSelect: (Int, Int) -> Void
     
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<grid.height, id: \.self) { y in
                 GridRow {
                     ForEach(0..<grid.width, id: \.self) { x in
-                        Button {
-                            onSelect(x, y)
-                        } label: {
-                            TileView(tile: grid[x, y], mineCount: grid.mineCount(x: x, y: y))
+                        Button("Tile \(x) \(y)") {
+                            grid.selectTile(x: x, y: y)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(TileButtonStyle(tile: grid[x, y], mineCount: grid.mineCount(x: x, y: y)))
                     }
                 }
             }
         }
-        .font(.title)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("Grid")
     }
 }
 
-struct TileView: View {
+struct TileButtonStyle: ButtonStyle {
     let tile: MinesweeperTile
     let mineCount: Int
 
-    private var imageName: String {
+    private func imageName(isPressed: Bool) -> String {
         switch tile.state {
         case .hidden:
-            return "Covered"
+            if isPressed {
+                return "Uncovered"
+            } else {
+                return "Covered"
+            }
         case .exposed:
             switch tile.content {
             case .mine:
@@ -88,18 +83,25 @@ struct TileView: View {
                     return String(mineCount)
                 }
             }
+        case .exposedMine:
+            switch tile.content {
+            case .mine:
+                return "BombClicked"
+            case .empty:
+                return "Uncovered"
+            }
         case .flagged:
             return "Flag"
         case .questionMark:
             return "Questionmark"
         }
     }
-    
-    var body: some View {
+
+    func makeBody(configuration: Configuration) -> some View {
         Rectangle()
             .fill(.gray)
             .overlay {
-                Image(imageName)
+                Image(imageName(isPressed: configuration.isPressed))
                     .interpolation(.none)
                     .resizable()
                     .scaledToFit()
