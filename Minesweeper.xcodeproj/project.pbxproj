@@ -13,7 +13,6 @@
 		D589B4B32927AB7600A7FC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4B22927AB7600A7FC24 /* Preview Assets.xcassets */; };
 		D589B4BD2927AB7600A7FC24 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */; };
 		D589B4C72927AB7600A7FC24 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */; };
-		D589B4C92927AB7600A7FC24 /* MinesweeperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4C82927AB7600A7FC24 /* MinesweeperUITestsLaunchTests.swift */; };
 		D589B4D62927ADD800A7FC24 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* Grid.swift */; };
 		D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */; };
 		D5BD656229322B9E00247DDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656129322B9E00247DDE /* ContentView.swift */; };
@@ -54,7 +53,6 @@
 		D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperTests.swift; sourceTree = "<group>"; };
 		D589B4C22927AB7600A7FC24 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
-		D589B4C82927AB7600A7FC24 /* MinesweeperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D589B4D52927ADD800A7FC24 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		D5BD655D29322B9E00247DDE /* MinesweeperWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinesweeperWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperWatchApp.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */,
-				D589B4C82927AB7600A7FC24 /* MinesweeperUITestsLaunchTests.swift */,
 			);
 			path = MinesweeperUITests;
 			sourceTree = "<group>";
@@ -370,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D589B4C72927AB7600A7FC24 /* MinesweeperUITests.swift in Sources */,
-				D589B4C92927AB7600A7FC24 /* MinesweeperUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
