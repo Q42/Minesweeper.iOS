@@ -75,7 +75,7 @@ struct TileButtonStyle: ButtonStyle {
         case .exposed:
             switch tile.content {
             case .mine:
-                return "Bomb"
+                return "Mine"
             case .empty:
                 if mineCount == 0 {
                     return "Uncovered"
@@ -86,7 +86,7 @@ struct TileButtonStyle: ButtonStyle {
         case .exposedMine:
             switch tile.content {
             case .mine:
-                return "BombClicked"
+                return "MineClicked"
             case .empty:
                 return "Uncovered"
             }
