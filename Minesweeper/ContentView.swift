@@ -43,11 +43,9 @@ struct ContentView: View {
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     let onSelect: (Int, Int) -> Void
-    let borderWidth: CGFloat = 2
-    let borderColor = Color("borderColor")
     
     var body: some View {
-        Grid(horizontalSpacing: borderWidth, verticalSpacing: borderWidth) {
+        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<grid.height, id: \.self) { y in
                 GridRow {
                     ForEach(0..<grid.width, id: \.self) { x in
@@ -61,8 +59,6 @@ struct GridView: View {
                 }
             }
         }
-        .background(borderColor)
-        .border(borderColor, width: borderWidth)
         .font(.title)
     }
 }

@@ -145,7 +145,6 @@ struct MinesweeperGrid {
     /// Exposes all adjacent points to the given point that are zero, and then repeats the process for those points.
     mutating func markSweep(x: Int, y: Int) {
         let zeroes = findZeroesConnectedTo(x: x, y: y, newSet:Set<Point>())
-        print(zeroes)
         var newGrid = self
         for point in zeroes {
             newGrid[point.x, point.y].state = .exposed
