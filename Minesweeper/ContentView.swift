@@ -72,30 +72,37 @@ struct GridView: View {
 struct TileView: View {
     let tile: MinesweeperTile
     let mineCount: Int
+
+    private var imageName: String {
+        switch tile.state {
+        case .hidden:
+            return "Covered"
+        case .exposed:
+            switch tile.content {
+            case .mine:
+                return "Bomb"
+            case .empty:
+                if mineCount == 0 {
+                    return "Uncovered"
+                } else {
+                    return String(mineCount)
+                }
+            }
+        case .flagged:
+            return "Flag"
+        case .questionMark:
+            return "Questionmark"
+        }
+    }
     
     var body: some View {
         Rectangle()
             .fill(.gray)
             .overlay {
-                switch tile.state {
-                case .hidden:
-                    Image("Covered").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
-                case .exposed:
-                    switch tile.content {
-                    case .mine:
-                        Image("Bomb").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
-                    case .empty:
-                        if mineCount == 0 {
-                            Image("Uncovered").interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
-                        } else {
-                            Image(String(mineCount)).interpolation(.none).resizable().ignoresSafeArea().scaledToFit()
-                        }
-                    }
-                case .flagged:
-                    Image("Flag")
-                case .questionMark:
-                    Image("Questionmark")
-                }
+                Image(imageName)
+                    .interpolation(.none)
+                    .resizable()
+                    .scaledToFit()
             }
     }
 }
