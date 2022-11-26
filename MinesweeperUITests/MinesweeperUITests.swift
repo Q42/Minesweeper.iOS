@@ -23,12 +23,12 @@ final class MinesweeperUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // (x, y, mineCount)
-        let pointSequence: [(Int, Int, Int)] = [
-            (0, 0, 1),
-            (0, 1, 1),
-            (0, 2, 0),
-            (6, 6, 0),
+        // (x, y, label)
+        let pointSequence: [(Int, Int, String)] = [
+            (0, 0, "1 mines nearby"),
+            (0, 1, "1 mines nearby"),
+            (0, 2, "Empty"),
+            (6, 6, "Empty"),
         ]
 
         let app = XCUIApplication()
@@ -42,15 +42,16 @@ final class MinesweeperUITests: XCTestCase {
         #endif
         XCTAssertTrue(grid.exists)
 
-        for (x, y, mineCount) in pointSequence {
+        for (x, y, expectedLabel) in pointSequence {
             let tile = grid.buttons["Tile (\(x),\(y))"]
-            tile.click()
 
-            if mineCount == 0 {
-                XCTAssertEqual(tile.label, "Empty")
-            } else {
-                XCTAssertEqual(tile.label, "\(mineCount) mines nearby")
-            }
+            #if os(macOS)
+            tile.click()
+            #else
+            tile.tap()
+            #endif
+
+            XCTAssertEqual(tile.label, expectedLabel)
         }
     }
 
