@@ -23,7 +23,7 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView(grid: $grid)
+                GameView(grid: $grid)
             }
         }
         .commands {

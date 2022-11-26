@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GameView.swift
 //  MinesweeperWatch Watch App
 //
 //  Created by Mathijs Bernson on 26/11/2022.
@@ -8,10 +8,11 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @Binding var grid: MinesweeperGrid
+struct GameView: View {
+    @State var grid: MinesweeperGrid
     @State private var scale: CGFloat = 1.0
-    @ScaledMetric private var tileSize: CGFloat = 44
+    @FocusState private var isGridFocused
+    @ScaledMetric private var tileSize: CGFloat = 40
 
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
@@ -20,17 +21,21 @@ struct ContentView: View {
         ScrollView([.horizontal, .vertical]) {
             GridView(grid: $grid)
                 .disabled(grid.isGameOver)
+                .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
+                .focusable()
+                .focused($isGridFocused)
         }
-        .ignoresSafeArea()
+        .digitalCrownRotation($scale, from: 0.75, through: 1.5, sensitivity: .low)
+        .ignoresSafeArea(edges: [.bottom, .horizontal])
+        .onAppear { isGridFocused = true }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct GameView_Previews: PreviewProvider {
     static let factory = RandomGridFactory()
-    @State static var grid = factory.makeGrid(for: .beginner)
 
     static var previews: some View {
-        ContentView(grid: $grid)
+        GameView(grid: factory.makeGrid(for: .beginner))
     }
 }
