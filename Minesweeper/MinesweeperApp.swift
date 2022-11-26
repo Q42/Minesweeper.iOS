@@ -13,7 +13,11 @@ struct MinesweeperApp: App {
     @State var grid: MinesweeperGrid
 
     init() {
-        let gridFactory = SeededRandomGridFactory()
+        let seed = UserDefaults.standard.string(forKey: "seed")
+        if let seed {
+            print("Using seed: \(seed)")
+        }
+        let gridFactory = SeededRandomGridFactory(seed: seed?.data(using: .utf8))
         let config = GameConfiguration.default
         let grid = gridFactory.makeGrid(for: config)
         self.gridFactory = gridFactory
@@ -24,6 +28,7 @@ struct MinesweeperApp: App {
         WindowGroup {
             NavigationStack {
                 ContentView(grid: $grid)
+                    .navigationTitle("Minesweeper")
             }
         }
         .commands {
