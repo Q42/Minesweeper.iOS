@@ -26,6 +26,7 @@ struct GameConfiguration {
     static func custom(width: Int, height: Int, minesCount: Int) -> GameConfiguration {
         .init(width: width, height: height, minesCount: minesCount)
     }
+    static let `default` = GameConfiguration.beginner
 }
 
 protocol GridFactory {
@@ -74,11 +75,13 @@ struct MinesweeperGrid {
     let width: Int
     let height: Int
     private var grid: [Tile]
+    private(set) var isGameOver: Bool
 
     fileprivate init(width: Int, height: Int, grid: [Tile]) {
         self.width = width
         self.height = height
         self.grid = grid
+        self.isGameOver = false
     }
 
     subscript(x: Int, y: Int) -> Tile {
@@ -143,9 +146,9 @@ struct MinesweeperGrid {
     }
 
     /// Exposes all adjacent points to the given point that are zero, and then repeats the process for those points.
-    mutating func markSweep(x: Int, y: Int) {
+    private mutating func markSweep(x: Int, y: Int) {
         let zeroes = findZeroesConnectedTo(x: x, y: y, newSet:Set<Point>())
-        print(zeroes)
+        // We make a copy of the grid here to operate on, so we can freely mutate it and update ourselves only once.
         var newGrid = self
         for point in zeroes {
             newGrid[point.x, point.y].state = .exposed
@@ -153,11 +156,34 @@ struct MinesweeperGrid {
                 newGrid[point.x, point.y].state = .exposed
             }
         }
+        // Replace the contents of `self` with the updated grid.
         self = newGrid
     }
     
-    mutating func mineSelected(x: Int, y: Int) -> Bool {
-        return self[x,y].content == .mine
+    mutating func selectTile(x: Int, y: Int) {
+        self[x, y].state = .exposed
+        let tile = self[x,y]
+
+        if tile.content == .mine {
+            print("BOOM! Game over.")
+            exposeAllMines()
+            self[x, y].state = .exposedMine
+            isGameOver = true
+        } else if mineCount(x: x, y: y) == 0 {
+            markSweep(x: x, y: y)
+        }
+    }
+
+    private mutating func exposeAllMines() {
+        grid = grid.map { tile in
+            if tile.content == .mine {
+                var updatedTile = tile
+                updatedTile.state = .exposed
+                return updatedTile
+            } else {
+                return tile
+            }
+        }
     }
 }
 
@@ -170,6 +196,7 @@ struct MinesweeperTile {
         case flagged
         case questionMark
         case exposed
+        case exposedMine
     }
 
     enum Content {
