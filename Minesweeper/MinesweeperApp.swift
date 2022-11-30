@@ -23,18 +23,24 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ZStack(alignment: .bottom){
-                    
-                }.toolbar{
-                    ToolbarItem(placement: .primaryAction){
-                        Button(action: {
-                            grid = gridFactory.makeGrid(for: GameConfiguration.default)
-                        }, label: {
-                            Image(systemName: "restart")
-                        })
-                    }
-                }
                 GameView(grid: $grid)
+                    .toolbar{
+                        ToolbarItem(placement: .navigationBarTrailing){
+                            Button(action: {
+                                grid = gridFactory.makeGrid(for: GameConfiguration.default)
+                            }, label: {
+                                Image(systemName: "gearshape.fill")
+                            })
+                        }
+                        ToolbarItem(placement: .navigationBarLeading){
+                            Button(action: {
+                                grid = gridFactory.makeGrid(for: GameConfiguration.default)
+                            }, label: {
+                                Image(systemName: "restart")
+                            })
+                        }
+                }
+                
             }
         }
         .commands {
