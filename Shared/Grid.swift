@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import GameKit
 
-struct GameConfiguration {
+struct GameConfiguration: Hashable {
     let width: Int
     let height: Int
     let minesCount: Int
@@ -33,36 +32,6 @@ protocol GridFactory {
     func makeGrid(for configuration: GameConfiguration) -> MinesweeperGrid
 }
 
-struct RandomGridFactory: GridFactory {
-    private let randomSource: GKRandomSource
-
-    init(seed: Data? = nil) {
-        if let seed {
-            randomSource = GKARC4RandomSource(seed: seed)
-        } else {
-            randomSource = GKARC4RandomSource()
-        }
-    }
-
-    func makeGrid(for configuration: GameConfiguration) -> MinesweeperGrid {
-        let size = configuration.width * configuration.height
-        let emptyCount = size - configuration.minesCount
-
-        let mine = MinesweeperTile(state: .hidden, content: .mine)
-        let empty = MinesweeperTile(state: .hidden, content: .empty)
-
-        var grid: [MinesweeperTile] = Array(repeating: mine, count: configuration.minesCount) + Array(repeating: empty, count: emptyCount)
-        if let shuffled = randomSource.arrayByShufflingObjects(in: grid) as? [MinesweeperTile] {
-            grid = shuffled
-        }
-        return MinesweeperGrid(
-            width: configuration.width,
-            height: configuration.height,
-            grid: grid
-        )
-    }
-}
-
 struct MinesweeperGrid {
 
     struct Point: Hashable, Equatable {
@@ -77,7 +46,7 @@ struct MinesweeperGrid {
     private var grid: [Tile]
     private(set) var isGameOver: Bool
 
-    fileprivate init(width: Int, height: Int, grid: [Tile]) {
+    init(width: Int, height: Int, grid: [Tile]) {
         self.width = width
         self.height = height
         self.grid = grid

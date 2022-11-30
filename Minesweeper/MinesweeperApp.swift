@@ -13,7 +13,7 @@ struct MinesweeperApp: App {
     @State var grid: MinesweeperGrid
 
     init() {
-        let gridFactory = RandomGridFactory()
+        let gridFactory = SeededRandomGridFactory()
         let config = GameConfiguration.default
         let grid = gridFactory.makeGrid(for: config)
         self.gridFactory = gridFactory
@@ -23,7 +23,7 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView(grid: $grid)
+                GameView(grid: $grid)
             }
         }
         .commands {
