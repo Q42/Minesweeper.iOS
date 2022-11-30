@@ -11,23 +11,25 @@ import SwiftUI
 @main
 struct MinesweeperWatchApp: App {
     let gridFactory: GridFactory
-    @State var grid: MinesweeperGrid
 
     init() {
-        let gridFactory = RandomGridFactory()
-        let config = GameConfiguration.default
-        let grid = gridFactory.makeGrid(for: config)
-        self.gridFactory = gridFactory
-        self._grid = .init(initialValue: grid)
+        gridFactory = RandomGridFactory()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(grid: $grid)
+            NavigationStack {
+                List {
+                    Section("New game") {
+                        NavigationLink("Beginner", value: GameConfiguration.beginner)
+                        NavigationLink("Intermediate", value: GameConfiguration.intermediate)
+                        NavigationLink("Expert", value: GameConfiguration.expert)
+                    }
+                }
+                .navigationDestination(for: GameConfiguration.self) { configuration in
+                    GameView(grid: gridFactory.makeGrid(for: configuration))
+                }
+            }
         }
-    }
-
-    func newGame(for configuraton: GameConfiguration) {
-        grid = gridFactory.makeGrid(for: configuraton)
     }
 }

@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */; };
-		D589B4AD2927AB7500A7FC24 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AC2927AB7500A7FC24 /* ContentView.swift */; };
+		D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AC2927AB7500A7FC24 /* GameView.swift */; };
 		D589B4AF2927AB7600A7FC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4AE2927AB7600A7FC24 /* Assets.xcassets */; };
 		D589B4B32927AB7600A7FC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4B22927AB7600A7FC24 /* Preview Assets.xcassets */; };
 		D589B4BD2927AB7600A7FC24 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */; };
 		D589B4C72927AB7600A7FC24 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */; };
 		D589B4D62927ADD800A7FC24 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* Grid.swift */; };
 		D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */; };
-		D5BD656229322B9E00247DDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656129322B9E00247DDE /* ContentView.swift */; };
+		D5BD656229322B9E00247DDE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656129322B9E00247DDE /* GameView.swift */; };
 		D5BD656729322B9F00247DDE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5BD656629322B9F00247DDE /* Preview Assets.xcassets */; };
 		D5BD656C29322BC300247DDE /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656B29322BC300247DDE /* GridView.swift */; };
 		D5BD656E29322C9300247DDE /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* Grid.swift */; };
@@ -45,7 +45,7 @@
 /* Begin PBXFileReference section */
 		D589B4A72927AB7500A7FC24 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperApp.swift; sourceTree = "<group>"; };
-		D589B4AC2927AB7500A7FC24 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D589B4AC2927AB7500A7FC24 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D589B4AE2927AB7600A7FC24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minesweeper.entitlements; sourceTree = "<group>"; };
 		D589B4B22927AB7600A7FC24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		D589B4D52927ADD800A7FC24 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		D5BD655D29322B9E00247DDE /* MinesweeperWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinesweeperWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperWatchApp.swift; sourceTree = "<group>"; };
-		D5BD656129322B9E00247DDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D5BD656129322B9E00247DDE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D5BD656629322B9F00247DDE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D5BD656B29322BC300247DDE /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		D5BD657129322D8C00247DDE /* RandomGridFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGridFactory.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
-				D589B4AC2927AB7500A7FC24 /* ContentView.swift */,
+				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
 				D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */,
 				D589B4B12927AB7600A7FC24 /* Preview Content */,
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */,
-				D5BD656129322B9E00247DDE /* ContentView.swift */,
+				D5BD656129322B9E00247DDE /* GameView.swift */,
 				D5BD657129322D8C00247DDE /* RandomGridFactory.swift */,
 				D5BD656529322B9F00247DDE /* Preview Content */,
 			);
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D589B4AD2927AB7500A7FC24 /* ContentView.swift in Sources */,
+				D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */,
 				D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */,
 				D5BD657729322EDE00247DDE /* SeededRandomGridFactory.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
@@ -375,7 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */,
-				D5BD656229322B9E00247DDE /* ContentView.swift in Sources */,
+				D5BD656229322B9E00247DDE /* GameView.swift in Sources */,
 				D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */,
 				D5BD656F29322C9300247DDE /* GridView.swift in Sources */,
 				D5BD656E29322C9300247DDE /* Grid.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GameConfiguration {
+struct GameConfiguration: Hashable {
     let width: Int
     let height: Int
     let minesCount: Int

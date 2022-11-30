@@ -32,6 +32,8 @@ struct GridView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("Grid")
+        .background(.gray)
+        .font(.title)
     }
 }
 
