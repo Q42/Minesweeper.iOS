@@ -23,19 +23,35 @@ final class MinesweeperUITests: XCTestCase {
     }
 
     func testExample() throws {
-        // UI tests must launch the application that they test.
+        // (x, y, label)
+        let pointSequence: [(Int, Int, String)] = [
+            (0, 0, "1 mines nearby"),
+            (0, 1, "1 mines nearby"),
+            (0, 2, "Empty"),
+            (6, 6, "Empty"),
+        ]
+
         let app = XCUIApplication()
+        app.launchArguments = ["-seed", "hakvoort!"]
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        #if os(macOS)
+        let grid = app.windows["Minesweeper"].groups["Grid"]
+        #else
+        let grid = app.otherElements["Grid"]
+        #endif
+        XCTAssertTrue(grid.exists)
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        for (x, y, expectedLabel) in pointSequence {
+            let tile = grid.buttons["Tile (\(x),\(y))"]
+
+            #if os(macOS)
+            tile.click()
+            #else
+            tile.tap()
+            #endif
+
+            XCTAssertEqual(tile.label, expectedLabel)
         }
     }
 }
