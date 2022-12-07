@@ -15,11 +15,11 @@ struct MinesweeperApp: App {
     init() {
         let seed = UserDefaults.standard.string(forKey: "seed")
         if let seed {
-            print("Using seed: \(seed)")
+            print("Game was initialized using a fixed seed: \(seed)")
         }
         let gridFactory = SeededRandomGridFactory(seed: seed?.data(using: .utf8))
-        let config = GameConfiguration.default
-        let grid = gridFactory.makeGrid(for: config)
+        let grid = gridFactory.makeGrid(for: GameConfiguration.default)
+
         self.gridFactory = gridFactory
         self._grid = .init(initialValue: grid)
     }

@@ -25,7 +25,7 @@ final class MinesweeperTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         let factory = SeededRandomGridFactory(seed: "testing".data(using: .utf8))
-        var grid = factory.makeGrid(for: .beginner)
+        let grid = factory.makeGrid(for: .beginner)
         XCTAssertEqual(grid.width, 9)
         XCTAssertEqual(grid.height, 9)
     }
