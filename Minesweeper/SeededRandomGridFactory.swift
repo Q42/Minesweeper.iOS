@@ -9,9 +9,13 @@
 import Foundation
 import GameKit
 
+/// Grid factory that uses a seeded random number source from Apple's GameKit to generate grids in a deterministic manner if we want it to.
 struct SeededRandomGridFactory: GridFactory {
-    private let randomSource: GKRandomSource
+    private let randomSource: GKARC4RandomSource
 
+    var seed: Data { randomSource.seed }
+
+    /// Initialize the factory with a seed, if given. If `nil` is passed, a random one is selected.
     init(seed: Data? = nil) {
         if let seed {
             randomSource = GKARC4RandomSource(seed: seed)
