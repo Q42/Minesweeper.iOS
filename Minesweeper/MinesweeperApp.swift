@@ -28,7 +28,7 @@ struct MinesweeperApp: App {
         WindowGroup {
             NavigationStack {
                 GameView(grid: $grid)
-                    .navigationTitle("Minesweeper")
+                    .navigationTitle(Text("Minesweeper", comment: "App title bar"))
             }
         }
         .commands {

@@ -68,19 +68,19 @@ enum TileDescription {
     var localizedDescription: String {
         switch self {
         case .covered:
-            return String(localized: "Covered")
+            return String(localized: "Covered", comment: "Accessibility description of a tile")
         case .uncoveredEmpty:
-            return String(localized: "Empty")
+            return String(localized: "Empty", comment: "Accessibility description of a tile")
         case .uncoveredMine:
-            return String(localized: "Uncovered mine")
+            return String(localized: "Mine", comment: "Accessibility description of a tile")
         case .mine:
-            return String(localized: "Mine")
+            return String(localized: "Mine", comment: "Accessibility description of a tile")
         case .uncovered(let mineCount):
-            return String(localized: "\(mineCount) mines nearby")
+            return String(localized: "\(mineCount) mines nearby", comment: "Accessibility description of a tile")
         case .flag:
-            return String(localized: "Flagged")
+            return String(localized: "Flag", comment: "Accessibility description of a tile")
         case .questionMark:
-            return String(localized: "Question mark")
+            return String(localized: "Question mark", comment: "Accessibility description of a tile")
         }
     }
 }
