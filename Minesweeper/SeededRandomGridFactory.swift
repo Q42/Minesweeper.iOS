@@ -38,7 +38,7 @@ struct SeededRandomGridFactory: GridFactory {
         return MinesweeperGrid(
             width: configuration.width,
             height: configuration.height,
-            grid: grid
+            memory: grid
         )
     }
 }

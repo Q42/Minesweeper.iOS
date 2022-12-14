@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
+    @Binding var isGameOver: Bool
 
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
@@ -21,7 +22,7 @@ struct GridView: View {
                         let tileDescription = descriptionForTile(tile, mineCount: mineCount, isPressed: false).localizedDescription
 
                         Button(tileDescription) {
-                            grid.selectTile(x: x, y: y)
+                            isGameOver = grid.selectTile(x: x, y: y)
                         }
                         .buttonStyle(TileButtonStyle(tile: tile, mineCount: mineCount))
                         .accessibilityLabel(tileDescription)
@@ -142,8 +143,9 @@ struct GridView_Previews: PreviewProvider {
     #endif
 
     @State static var grid = factory.makeGrid(for: .beginner)
+    @State static var isGameOver = false
 
     static var previews: some View {
-        GridView(grid: $grid)
+        GridView(grid: $grid, isGameOver: $isGameOver)
     }
 }

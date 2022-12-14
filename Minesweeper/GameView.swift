@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var grid: MinesweeperGrid
+    @Binding var isGameOver: Bool
     @State private var scale: CGFloat = 1.0
     @ScaledMetric private var tileSize: CGFloat = 44
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
@@ -18,8 +19,8 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid)
-                .disabled(grid.isGameOver)
+            GridView(grid: $grid, isGameOver: $isGameOver)
+                .disabled(isGameOver)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
@@ -44,8 +45,9 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
     @State static var grid = factory.makeGrid(for: .beginner)
+    @State static var isGameOver = false
 
     static var previews: some View {
-        GameView(grid: $grid)
+        GameView(grid: $grid, isGameOver: $isGameOver)
     }
 }

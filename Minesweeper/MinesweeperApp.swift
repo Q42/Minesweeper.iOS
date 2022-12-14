@@ -11,6 +11,7 @@ import SwiftUI
 struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
+    @State var isGameOver: Bool = false
 
     init() {
         let seed = UserDefaults.standard.string(forKey: "seed")
@@ -27,7 +28,7 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                GameView(grid: $grid)
+                GameView(grid: $grid, isGameOver: $isGameOver)
                     .navigationTitle(Text("Minesweeper", comment: "App title bar"))
             }
         }

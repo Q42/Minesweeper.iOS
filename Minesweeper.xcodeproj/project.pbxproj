@@ -13,12 +13,12 @@
 		D589B4B32927AB7600A7FC24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4B22927AB7600A7FC24 /* Preview Assets.xcassets */; };
 		D589B4BD2927AB7600A7FC24 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */; };
 		D589B4C72927AB7600A7FC24 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */; };
-		D589B4D62927ADD800A7FC24 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* Grid.swift */; };
+		D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */; };
 		D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */; };
 		D5BD656229322B9E00247DDE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656129322B9E00247DDE /* GameView.swift */; };
 		D5BD656729322B9F00247DDE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5BD656629322B9F00247DDE /* Preview Assets.xcassets */; };
 		D5BD656C29322BC300247DDE /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656B29322BC300247DDE /* GridView.swift */; };
-		D5BD656E29322C9300247DDE /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* Grid.swift */; };
+		D5BD656E29322C9300247DDE /* MinesweeperGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */; };
 		D5BD656F29322C9300247DDE /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656B29322BC300247DDE /* GridView.swift */; };
 		D5BD657029322C9300247DDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4AE2927AB7600A7FC24 /* Assets.xcassets */; };
 		D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD657129322D8C00247DDE /* RandomGridFactory.swift */; };
@@ -27,6 +27,8 @@
 		D5D4930F2940E6BF00BD74B7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5D493112940E6BF00BD74B7 /* Localizable.strings */; };
 		D5D493132940E6C600BD74B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5D493162940E6C600BD74B7 /* InfoPlist.strings */; };
 		D5D493142940E6C600BD74B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5D493162940E6C600BD74B7 /* InfoPlist.strings */; };
+		D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */; };
+		D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +59,7 @@
 		D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperTests.swift; sourceTree = "<group>"; };
 		D589B4C22927AB7600A7FC24 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
-		D589B4D52927ADD800A7FC24 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperGrid.swift; sourceTree = "<group>"; };
 		D5BD655D29322B9E00247DDE /* MinesweeperWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinesweeperWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperWatchApp.swift; sourceTree = "<group>"; };
 		D5BD656129322B9E00247DDE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		D5D493122940E6C200BD74B7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D5D493172940E6C900BD74B7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5D493182940EA0C00BD74B7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid2D.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				D5BD656B29322BC300247DDE /* GridView.swift */,
-				D589B4D52927ADD800A7FC24 /* Grid.swift */,
+				D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */,
+				D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */,
 				D589B4AE2927AB7600A7FC24 /* Assets.xcassets */,
 				D5D493112940E6BF00BD74B7 /* Localizable.strings */,
 				D5D493162940E6C600BD74B7 /* InfoPlist.strings */,
@@ -364,8 +368,9 @@
 				D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */,
 				D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */,
 				D5BD657729322EDE00247DDE /* SeededRandomGridFactory.swift in Sources */,
+				D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
-				D589B4D62927ADD800A7FC24 /* Grid.swift in Sources */,
+				D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,8 +397,9 @@
 				D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */,
 				D5BD656229322B9E00247DDE /* GameView.swift in Sources */,
 				D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */,
+				D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5BD656F29322C9300247DDE /* GridView.swift in Sources */,
-				D5BD656E29322C9300247DDE /* Grid.swift in Sources */,
+				D5BD656E29322C9300247DDE /* MinesweeperGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
