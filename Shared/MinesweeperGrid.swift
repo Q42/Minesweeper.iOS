@@ -1,5 +1,5 @@
 //
-//  Grid.swift
+//  MinesweeperGrid.swift
 //  Minesweeper
 //
 //  Created by Mathijs Bernson on 18/11/2022.
@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Configuration object that tells the `GridFactory` the parameters for the grid that it should generate.
 struct GameConfiguration: Hashable {
     let width: Int
     let height: Int
@@ -28,69 +29,15 @@ struct GameConfiguration: Hashable {
     static let `default` = GameConfiguration.beginner
 }
 
+/// A type that creates Minesweeper grids. The configuration determines the size and difficulty of the grid.
 protocol GridFactory {
     func makeGrid(for configuration: GameConfiguration) -> MinesweeperGrid
 }
 
-struct MinesweeperGrid {
+typealias MinesweeperGrid = Grid2D<MinesweeperTile>
 
-    struct Point: Hashable, Equatable {
-        let x: Int
-        let y: Int
-    }
-
-    typealias Tile = MinesweeperTile
-
-    let width: Int
-    let height: Int
-    private var grid: [Tile]
-    private(set) var isGameOver: Bool
-
-    init(width: Int, height: Int, grid: [Tile]) {
-        self.width = width
-        self.height = height
-        self.grid = grid
-        self.isGameOver = false
-    }
-
-    subscript(x: Int, y: Int) -> Tile {
-        get {
-            grid[y * width + x]
-        }
-        set(newValue) {
-            grid[y * width + x] = newValue
-        }
-    }
-
-    /// Checks whether a point is within the grid.
-    private func isInBounds(x: Int, y: Int) -> Bool {
-        return x >= 0 && x < width &&
-               y >= 0 && y < height
-    }
-
-    /// Gets the points directly adjacent to a point.
-    func adjacentPoints(x: Int, y: Int) -> [Point] {
-        var result: [Point] = []
-        for relX in (-1...1) {
-            for relY in (-1...1) {
-                let absX = x + relX
-                let absY = y + relY
-                if !(relX == 0 && relY == 0) && isInBounds(x: absX, y: absY) {
-                    result.append(Point(x: absX, y: absY))
-                }
-            }
-        }
-        return result
-    }
-
-    /// Gets the tiles directly adjacent to a point.
-    func adjacentTiles(x: Int, y: Int) -> [Tile] {
-        adjacentPoints(x: x, y: y)
-            .map { point in
-                self[point.x, point.y]
-            }
-    }
-
+/// Functions of the grid that are specific to the Minesweeper game.
+extension Grid2D where Tile == MinesweeperTile {
     /// Gets the total number of mines that are adjacent to a point.
     func mineCount(x: Int, y: Int) -> Int {
         adjacentTiles(x: x, y: y)
@@ -129,7 +76,7 @@ struct MinesweeperGrid {
         self = newGrid
     }
     
-    mutating func selectTile(x: Int, y: Int) {
+    mutating func selectTile(x: Int, y: Int) -> Bool {
         self[x, y].state = .exposed
         let tile = self[x,y]
 
@@ -137,14 +84,15 @@ struct MinesweeperGrid {
             print("BOOM! Game over.")
             exposeAllMines()
             self[x, y].state = .exposedMine
-            isGameOver = true
+            return true
         } else if mineCount(x: x, y: y) == 0 {
             markSweep(x: x, y: y)
         }
+        return false
     }
 
     private mutating func exposeAllMines() {
-        grid = grid.map { tile in
+        memory = memory.map { tile in
             if tile.content == .mine {
                 var updatedTile = tile
                 updatedTile.state = .exposed

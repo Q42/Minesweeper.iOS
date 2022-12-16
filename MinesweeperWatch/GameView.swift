@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GameView: View {
     @State var grid: MinesweeperGrid
+    @State var isGameOver: Bool = false
     @State private var scale: CGFloat = 1.0
     @FocusState private var isGridFocused
     @ScaledMetric private var tileSize: CGFloat = 40
@@ -19,8 +20,8 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid)
-                .disabled(grid.isGameOver)
+            GridView(grid: $grid, isGameOver: $isGameOver)
+                .disabled(isGameOver)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
                 .focusable()
