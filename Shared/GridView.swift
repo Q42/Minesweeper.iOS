@@ -33,7 +33,7 @@ struct GridView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("Grid")
-        .background(.gray)
+        .background(Color("darkGray"))
         .font(.title)
     }
 }
@@ -92,7 +92,7 @@ private struct TileButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         Rectangle()
-            .fill(.gray)
+            .fill(Color("lightGray"))
             .overlay {
                 Image(descriptionForTile(tile, mineCount: mineCount, isPressed: configuration.isPressed).imageName)
                     .interpolation(.none)

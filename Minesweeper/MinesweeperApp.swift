@@ -11,6 +11,7 @@ import SwiftUI
 struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
+    @State var isPresentingGame: Bool = false
     @State var isGameOver: Bool = false
 
     init() {
@@ -28,8 +29,28 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
+                #if os(macOS)
                 GameView(grid: $grid, isGameOver: $isGameOver)
                     .navigationTitle(Text("Minesweeper", comment: "App title bar"))
+                #else
+                List {
+                    Section("New game") {
+                        Button("Beginner") {
+                            newGame(for: .beginner)
+                        }
+                        Button("Intermediate") {
+                            newGame(for: .intermediate)
+                        }
+                        Button("Expert") {
+                            newGame(for: .expert)
+                        }
+                    }
+                }
+                .navigationTitle(Text("Minesweeper", comment: "App title bar"))
+                .navigationDestination(isPresented: $isPresentingGame) {
+                    GameView(grid: $grid, isGameOver: $isGameOver)
+                }
+                #endif
             }
         }
         .commands {
@@ -38,6 +59,7 @@ struct MinesweeperApp: App {
                     Button("Beginner") {
                         newGame(for: .beginner)
                     }
+                    .keyboardShortcut("n", modifiers: .command)
                     Button("Intermediate") {
                         newGame(for: .intermediate)
                     }
@@ -51,5 +73,7 @@ struct MinesweeperApp: App {
 
     func newGame(for configuraton: GameConfiguration) {
         grid = gridFactory.makeGrid(for: configuraton)
+        isPresentingGame = true
+        isGameOver = false
     }
 }
