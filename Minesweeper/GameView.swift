@@ -62,11 +62,12 @@ struct GameView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Menu {
-                    Button {
-                        print("TODO")
-                    } label: {
-                        Label("Restart", systemImage: "restart")
-                    }
+                    // TODO: Implement play again button
+//                    Button {
+//                        print("TODO")
+//                    } label: {
+//                        Label("Restart", systemImage: "restart")
+//                    }
                     Button(role: .destructive) {
                         dismiss()
                     } label: {
