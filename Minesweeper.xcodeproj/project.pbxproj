@@ -29,6 +29,8 @@
 		D5D493142940E6C600BD74B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5D493162940E6C600BD74B7 /* InfoPlist.strings */; };
 		D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */; };
 		D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */; };
+		D5F5A9A02983FC4B001C2A0E /* TileDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */; };
+		D5F5A9A12983FC4B001C2A0E /* TileDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,7 @@
 		D5D493172940E6C900BD74B7 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5D493182940EA0C00BD74B7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid2D.swift; sourceTree = "<group>"; };
+		D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				D5BD656B29322BC300247DDE /* GridView.swift */,
+				D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */,
 				D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */,
 				D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */,
 				D589B4AE2927AB7600A7FC24 /* Assets.xcassets */,
@@ -369,6 +373,7 @@
 			files = (
 				D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */,
 				D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */,
+				D5F5A9A02983FC4B001C2A0E /* TileDescription.swift in Sources */,
 				D5BD657729322EDE00247DDE /* SeededRandomGridFactory.swift in Sources */,
 				D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
@@ -398,6 +403,7 @@
 			files = (
 				D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */,
 				D5BD656229322B9E00247DDE /* GameView.swift in Sources */,
+				D5F5A9A12983FC4B001C2A0E /* TileDescription.swift in Sources */,
 				D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */,
 				D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5BD656F29322C9300247DDE /* GridView.swift in Sources */,
