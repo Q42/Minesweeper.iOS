@@ -69,7 +69,7 @@ extension TileDescription {
         case .flag:
             return "Flag"
         case .questionMark:
-            return "QuestionMark"
+            return "Questionmark"
         }
     }
 
