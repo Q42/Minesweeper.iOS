@@ -38,6 +38,43 @@ typealias MinesweeperGrid = Grid2D<MinesweeperTile>
 
 /// Functions of the grid that are specific to the Minesweeper game.
 extension Grid2D where Tile == MinesweeperTile {
+    /// Determines whether the game is in a won or lost condition.
+    /// If the game is not won or lost yet, nil is returned.
+    var state: MinesweeperState? {
+        // Check lose condition
+        let anyMineIsExposed = memory.contains { tile in
+            tile.state == .exposedMine
+        }
+        if anyMineIsExposed {
+            return .gameOver
+        }
+
+        // Check win condition
+
+        // Check if all mines have a flag
+        let mines = memory.filter { tile in
+            tile.content == .mine
+        }
+        let flaggedMines = mines.filter { tile in
+            tile.state == .flagged
+        }
+        let allMinesAreFlagged = mines.count == flaggedMines.count
+
+        // Check if all empty tiles *don't* have a flag
+        let emptyTiles = memory.filter { tile in
+            tile.content == .empty
+        }
+        let nonMineTilesDontHaveFlags = emptyTiles.allSatisfy { tile in
+            tile.state != .flagged
+        }
+
+        if allMinesAreFlagged && nonMineTilesDontHaveFlags {
+            return .won
+        } else {
+            return nil
+        }
+    }
+
     /// Gets the total number of mines that are adjacent to a point.
     func mineCount(x: Int, y: Int) -> Int {
         adjacentTiles(x: x, y: y)
@@ -88,9 +125,11 @@ extension Grid2D where Tile == MinesweeperTile {
         self = newGrid
     }
     
-    mutating func selectTile(x: Int, y: Int) -> Bool {
-        if self[x,y].state == .flagged || self[x,y].state == .questionMark {
-            return false }
+    mutating func selectTile(x: Int, y: Int) {
+        guard self[x,y].state != .flagged && self[x,y].state != .questionMark else {
+            return
+        }
+
         self[x, y].state = .exposed
         let tile = self[x,y]
 
@@ -98,14 +137,12 @@ extension Grid2D where Tile == MinesweeperTile {
             print("BOOM! Game over.")
             exposeAllMines()
             self[x, y].state = .exposedMine
-            return true
         } else if mineCount(x: x, y: y) == 0 {
             markSweep(x: x, y: y)
         }
-        return false
     }
     
-    mutating func flagTile(x: Int, y: Int) ->Void {
+    mutating func flagTile(x: Int, y: Int) {
         if self[x, y].state == .hidden{
             self[x, y].state = .flagged
         }
@@ -146,4 +183,9 @@ struct MinesweeperTile {
         case mine
         case empty
     }
+}
+
+enum MinesweeperState: Int, Identifiable {
+    case won, gameOver
+    var id: Int { rawValue }
 }

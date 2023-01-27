@@ -9,7 +9,9 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var isGameOver: Bool
+    @Binding var state: MinesweeperState?
+    let playAgain: () -> Void
+
     @State private var scale: CGFloat = 1.0
     @ScaledMetric private var tileSize: CGFloat = 44
     @Environment(\.dismiss) var dismiss
@@ -23,15 +25,22 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
         
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, isGameOver: $isGameOver, flagMode: flagMode)
-                .disabled(isGameOver)
+            GridView(grid: $grid, state: $state, flagMode: flagMode)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
         }
         .onReceive(timer) { _ in
-            if isGameOver == false {
+            if state == nil {
                 time += .seconds(1)
+            }
+        }
+        .sheet(item: $state) { state in
+            switch state {
+            case .won:
+                GameWonView(playAgain: playAgain)
+            case .gameOver:
+                GameOverView(playAgain: playAgain)
             }
         }
 #if os(macOS)
@@ -88,11 +97,11 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var isGameOver = false
+    @State static var state: MinesweeperState?
     
     static var previews: some View {
         NavigationStack {
-            GameView(grid: $grid, isGameOver: $isGameOver)
+            GameView(grid: $grid, state: $state, playAgain: {}) 
         }
     }
 }
