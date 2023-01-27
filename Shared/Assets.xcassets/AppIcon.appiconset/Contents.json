@@ -1,73 +1,73 @@
 {
   "images" : [
     {
-      "filename" : "Minesweeper iOS.jpg",
+      "filename" : "Minesweeper-1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
-      "filename" : "Minesweeper-16.jpg",
+      "filename" : "Minesweeper-Mac-16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "Minesweeper.jpg",
+      "filename" : "Minesweeper-Mac-32.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "Minesweeper macOS.jpg",
+      "filename" : "Minesweeper-Mac-32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "Minesweeper-64.png",
+      "filename" : "Minesweeper-Mac-64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "Minesweeper-128.png",
+      "filename" : "Minesweeper-Mac-128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "Minesweeper-256 1.png",
+      "filename" : "Minesweeper-Mac-256.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "Minesweeper-256.png",
+      "filename" : "Minesweeper-Mac-256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "Minesweeper macOs - 513.jpg",
+      "filename" : "Minesweeper-Mac-512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "Minesweeper macOs - 512.jpg",
+      "filename" : "Minesweeper-Mac-512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "Minesweeper iOS 1.jpg",
+      "filename" : "Minesweeper-Mac-1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
     },
     {
-      "filename" : "Minesweeper watchOS.jpg",
+      "filename" : "Minesweeper-1024.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"
