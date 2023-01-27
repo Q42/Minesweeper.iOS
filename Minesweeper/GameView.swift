@@ -27,10 +27,10 @@ struct GameView: View {
                 .frame(width: width * scale, height: height * scale)
         }
 #if os(macOS)
-        // Set window size
+        // Set minimum window size
         .frame(
-            minWidth: width, idealWidth: width, maxWidth: .infinity,
-            minHeight: height, idealHeight: height, maxHeight: .infinity
+            minWidth: width, maxWidth: .infinity,
+            minHeight: height, maxHeight: .infinity
         )
 #endif
         .gesture(
