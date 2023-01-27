@@ -66,6 +66,9 @@ struct MinesweeperApp: App {
                             }
                         }
                     }
+                    NavigationLink("About"){
+                        AboutView()
+                    }
                 }
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                 .navigationDestination(isPresented: $isPresentingGame) {
