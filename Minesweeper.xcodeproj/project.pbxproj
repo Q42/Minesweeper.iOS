@@ -37,6 +37,10 @@
 		D5F5A9BE298422C6001C2A0E /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */; };
 		D5F5A9BF298422C6001C2A0E /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */; };
 		D5F5A9C8298430E0001C2A0E /* CustomGameForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9C7298430E0001C2A0E /* CustomGameForm.swift */; };
+		D5F5A9CB29844D9D001C2A0E /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9CA29844D9D001C2A0E /* LearnView.swift */; };
+		D5F5A9CC29844DAA001C2A0E /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9CA29844D9D001C2A0E /* LearnView.swift */; };
+		D5F5A9CD29844DAC001C2A0E /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C7298420F1003C8FC6 /* AboutView.swift */; };
+		D5F5A9CF29845284001C2A0E /* Q42.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C9298421CC003C8FC6 /* Q42.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +90,8 @@
 		D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameForm.swift; sourceTree = "<group>"; };
 		D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedView.swift; sourceTree = "<group>"; };
 		D5F5A9C7298430E0001C2A0E /* CustomGameForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameForm.swift; sourceTree = "<group>"; };
+		D5F5A9CA29844D9D001C2A0E /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		D5F5A9CE29845150001C2A0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +157,6 @@
 			children = (
 				D5AC8C77294C7E0000D7C094 /* Info.plist */,
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
-				855699C7298420F1003C8FC6 /* AboutView.swift */,
 				D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */,
 				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
@@ -214,6 +219,8 @@
 				D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */,
 				D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */,
 				855699C9298421CC003C8FC6 /* Q42.swift */,
+				855699C7298420F1003C8FC6 /* AboutView.swift */,
+				D5F5A9CA29844D9D001C2A0E /* LearnView.swift */,
 				D589B4AE2927AB7600A7FC24 /* Assets.xcassets */,
 				D5D493112940E6BF00BD74B7 /* Localizable.strings */,
 				D5D493162940E6C600BD74B7 /* InfoPlist.strings */,
@@ -394,6 +401,7 @@
 				D5BD657729322EDE00247DDE /* SeededRandomGridFactory.swift in Sources */,
 				855699C8298420F1003C8FC6 /* AboutView.swift in Sources */,
 				D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
+				D5F5A9CB29844D9D001C2A0E /* LearnView.swift in Sources */,
 				D5F5A9BE298422C6001C2A0E /* GameEndedView.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
 				D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */,
@@ -423,13 +431,16 @@
 			files = (
 				D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */,
 				D5BD656229322B9E00247DDE /* GameView.swift in Sources */,
+				D5F5A9CD29844DAC001C2A0E /* AboutView.swift in Sources */,
 				D5F5A9C8298430E0001C2A0E /* CustomGameForm.swift in Sources */,
 				D5F5A9A12983FC4B001C2A0E /* TileDescription.swift in Sources */,
 				D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */,
+				D5F5A9CC29844DAA001C2A0E /* LearnView.swift in Sources */,
 				D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5F5A9BF298422C6001C2A0E /* GameEndedView.swift in Sources */,
 				D5BD656F29322C9300247DDE /* GridView.swift in Sources */,
 				D5BD656E29322C9300247DDE /* MinesweeperGrid.swift in Sources */,
+				D5F5A9CF29845284001C2A0E /* Q42.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +464,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D5D493122940E6C200BD74B7 /* nl */,
+				D5F5A9CE29845150001C2A0E /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

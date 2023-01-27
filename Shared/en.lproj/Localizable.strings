@@ -1,0 +1,9 @@
+"learn.part.1" = "Minesweeper is a classic game of logic and strategy. The goal of the game is to uncover all the squares on the board without hitting a mine.";
+
+"learn.part.2" = "To play, start by tapping on a square on the board. If it contains a mine, the game is over and you lose. If it does not contain a mine, a number will be revealed. This number indicates how many mines are in the 8 squares that surround it.";
+
+"learn.part.3" = "Using logic, you can use this number to determine which squares contain mines and which do not. You can then tap on the safe squares to reveal more numbers.";
+
+"learn.part.4" = "Once you have used the numbers to figure out which squares are safe and which contain mines, you can mark the mined squares with a flag to remind yourself that they contain a mine. You can use the **flag button** in the toolbar to toggle between uncovering and flagging when you tap a square.";
+
+"learn.part.5" = "Once you have flagged all of the mines, you can uncover the remaining squares and win the game.";
