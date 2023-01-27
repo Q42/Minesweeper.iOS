@@ -1,29 +1,63 @@
 /* Accessibility description of a tile */
 "%lld mines nearby" = "%lld mijnen in de buurt";
 
-/* New game menu item */
+/* No comment provided by engineer. */
 "Beginner" = "Beginner";
+
+/* No comment provided by engineer. */
+"Board" = "Bord";
 
 /* Accessibility description of a tile */
 "Covered" = "Bedekt";
 
-/* New game menu item */
-"Expert" = "Expert";
-
-/* New game menu item */
-"Intermediate" = "Gemiddeld";
+/* No comment provided by engineer. */
+"Custom" = "Op maat";
 
 /* Accessibility description of a tile */
 "Empty" = "Leeg";
 
+/* No comment provided by engineer. */
+"Expert" = "Expert";
+
+/* Accessibility description of a tile */
+"Flag" = "Vlag";
+
+/* No comment provided by engineer. */
+"Height" = "Hoogte";
+
+/* No comment provided by engineer. */
+"Height: %lld" = "Hoogte: %lld";
+
+/* No comment provided by engineer. */
+"Intermediate" = "Gemiddeld";
+
 /* Accessibility description of a tile */
 "Mine" = "Mijn";
+
+/* No comment provided by engineer. */
+"Mine count" = "Aantal mijnen";
+
+/* No comment provided by engineer. */
+"Mine count: %lld" = "Aantal mijnen: %lld";
+
+/* No comment provided by engineer. */
+"Mines" = "Mijnen";
 
 /* App title bar */
 "Minesweeper" = "Mijnenveger";
 
-/* New game menu */
+/* No comment provided by engineer. */
 "New game" = "Nieuw spel";
 
 /* Accessibility description of a tile */
 "Question mark" = "Vraagteken";
+
+/* No comment provided by engineer. */
+"Start game" = "Start spel";
+
+/* No comment provided by engineer. */
+"Width" = "Breedte";
+
+/* No comment provided by engineer. */
+"Width: %lld" = "Breedte: %lld";
+
