@@ -48,7 +48,7 @@ struct MinesweeperApp: App {
                 }
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                 .navigationDestination(isPresented: $isPresentingGame) {
-                    GameView(grid: $grid, isGameOver: $isGameOver)
+                    GameView(grid: $grid, isGameOver: $isGameOver).navigationBarBackButtonHidden()
                 }
                 #endif
             }
