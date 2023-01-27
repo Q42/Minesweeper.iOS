@@ -143,14 +143,15 @@ extension Grid2D where Tile == MinesweeperTile {
     }
     
     mutating func flagTile(x: Int, y: Int) {
-        if self[x, y].state == .hidden{
+        switch self[x, y].state {
+        case .hidden:
             self[x, y].state = .flagged
-        }
-        else if self[x,y].state == .flagged{
+        case .flagged:
             self[x,y].state = .questionMark
-        }
-        else {
+        case .questionMark:
             self[x,y].state = .hidden
+        default:
+            break
         }
     }
 
