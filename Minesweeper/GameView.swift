@@ -15,6 +15,8 @@ struct GameView: View {
     @Environment(\.dismiss) var dismiss
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     @State var flagMode: Bool = false
+    @State var time: Duration = .zero
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
@@ -26,6 +28,11 @@ struct GameView: View {
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
+        }
+        .onReceive(timer) { _ in
+            if isGameOver == false {
+                time += .seconds(1)
+            }
         }
 #if os(macOS)
         // Set minimum window size
@@ -42,9 +49,9 @@ struct GameView: View {
                 }
         )
 #if os(iOS)
+        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))").navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-
                 Menu {
                     Button {
                         print("TODO")

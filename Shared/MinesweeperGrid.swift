@@ -46,6 +46,18 @@ extension Grid2D where Tile == MinesweeperTile {
             }
             .count
     }
+    
+    var totalFlaggedTileCount: Int{
+        memory.filter{tile in
+            tile.state == .flagged
+        }.count
+    }
+    
+    var totalMineTileCount: Int{
+        memory.filter{tile in
+            tile.content == .mine
+        }.count
+    }
 
     /// Recursively finds all the points that are zero which are connected to the given point.
     private func findZeroesConnectedTo(x: Int, y: Int, newSet: Set<Point> = Set()) -> Set<Point> {
