@@ -23,7 +23,7 @@ struct GameView: View {
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
         let height = tileSize * CGFloat(grid.height)
-        
+
         ScrollView([.horizontal, .vertical]) {
             GridView(grid: $grid, state: $state, flagMode: flagMode)
                 .frame(width: width, height: height)
@@ -57,9 +57,13 @@ struct GameView: View {
                     scale = value
                 }
         )
+
+        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))")
 #if os(iOS)
-        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))").navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)
+#endif
         .toolbar {
+#if os(iOS)
             ToolbarItem(placement: .navigationBarLeading) {
                 Menu {
                     // TODO: Implement play again button
@@ -78,8 +82,9 @@ struct GameView: View {
                     Image(systemName: "gear")
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button{
+#endif
+            ToolbarItem {
+                Button {
                     flagMode.toggle()
                 } label: {
                     if flagMode{
@@ -91,7 +96,6 @@ struct GameView: View {
                 }
             }
         }
-#endif
     }
 }
 
