@@ -30,10 +30,10 @@ struct GameView: View {
                 .frame(width: width * scale, height: height * scale)
         }
 #if os(macOS)
-        // Set window size
+        // Set minimum window size
         .frame(
-            minWidth: width, idealWidth: width, maxWidth: .infinity,
-            minHeight: height, idealHeight: height, maxHeight: .infinity
+            minWidth: width, maxWidth: .infinity,
+            minHeight: height, maxHeight: .infinity
         )
 #endif
         .gesture(
@@ -43,10 +43,14 @@ struct GameView: View {
                     scale = value
                 }
         )
+#if os(iOS)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
+
                 Menu {
-                    Button{} label: {
+                    Button {
+                        print("TODO")
+                    } label: {
                         Label("Restart", systemImage: "restart")
                     }
                     Button(role: .destructive) {
@@ -72,6 +76,7 @@ struct GameView: View {
                 }
             }
         }
+#endif
     }
 }
 
