@@ -20,7 +20,7 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, isGameOver: $isGameOver)
+            GridView(grid: $grid, isGameOver: $isGameOver, flagMode: false) //toDo: add flag for watch
                 .disabled(isGameOver)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
