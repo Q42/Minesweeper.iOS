@@ -40,10 +40,13 @@ struct GameView: View {
                     scale = value
                 }
         )
+#if os(iOS)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem {
                 Menu {
-                    Button{} label: {
+                    Button {
+                        print("TODO")
+                    } label: {
                         Label("Restart", systemImage: "restart")
                     }
                     Button(role: .destructive) {
@@ -57,6 +60,7 @@ struct GameView: View {
                 }
             }
         }
+#endif
     }
 }
 
