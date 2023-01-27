@@ -64,8 +64,10 @@ struct GridView_Previews: PreviewProvider {
 
     @State static var grid = factory.makeGrid(for: .beginner)
     @State static var isGameOver = false
+    static let tileSize: CGFloat = 30
 
     static var previews: some View {
         GridView(grid: $grid, isGameOver: $isGameOver)
+            .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
     }
 }
