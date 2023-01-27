@@ -14,13 +14,16 @@ struct GameView: View {
     @ScaledMetric private var tileSize: CGFloat = 44
     @Environment(\.dismiss) var dismiss
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
+    @State var flagMode: Bool = false
+    
+    
     
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
         let height = tileSize * CGFloat(grid.height)
         
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, isGameOver: $isGameOver)
+            GridView(grid: $grid, isGameOver: $isGameOver, flagMode: flagMode)
                 .disabled(isGameOver)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
@@ -41,7 +44,7 @@ struct GameView: View {
                 }
         )
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Menu {
                     Button{} label: {
                         Label("Restart", systemImage: "restart")
@@ -54,6 +57,18 @@ struct GameView: View {
                     
                 } label: {
                     Image(systemName: "gear")
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button{
+                    flagMode.toggle()
+                } label: {
+                    if flagMode{
+                        Image(systemName: "flag.slash.circle")
+                    }
+                    else{
+                        Image(systemName: "flag.circle")
+                    }
                 }
             }
         }

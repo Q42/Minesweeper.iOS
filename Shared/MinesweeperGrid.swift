@@ -77,6 +77,8 @@ extension Grid2D where Tile == MinesweeperTile {
     }
     
     mutating func selectTile(x: Int, y: Int) -> Bool {
+        if self[x,y].state == .flagged || self[x,y].state == .questionMark {
+            return false }
         self[x, y].state = .exposed
         let tile = self[x,y]
 
@@ -89,6 +91,18 @@ extension Grid2D where Tile == MinesweeperTile {
             markSweep(x: x, y: y)
         }
         return false
+    }
+    
+    mutating func flagTile(x: Int, y: Int) ->Void {
+        if self[x, y].state == .hidden{
+            self[x, y].state = .flagged
+        }
+        else if self[x,y].state == .flagged{
+            self[x,y].state = .questionMark
+        }
+        else {
+            self[x,y].state = .hidden
+        }
     }
 
     private mutating func exposeAllMines() {
