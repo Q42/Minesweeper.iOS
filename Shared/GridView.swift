@@ -19,13 +19,13 @@ struct GridView: View {
                     ForEach(0..<grid.width, id: \.self) { x in
                         let tile = grid[x, y]
                         let mineCount = grid.mineCount(x: x, y: y)
-                        let tileDescription = descriptionForTile(tile, mineCount: mineCount, isPressed: false).localizedDescription
+                        let tileDescription = TileDescription(tile, mineCount: mineCount, isPressed: false)
 
-                        Button(tileDescription) {
+                        Button(tileDescription.localizedDescription) {
                             isGameOver = grid.selectTile(x: x, y: y)
                         }
-                        .buttonStyle(TileButtonStyle(tile: tile, mineCount: mineCount))
-                        .accessibilityLabel(tileDescription)
+                        .buttonStyle(TileButtonStyle(tile: tile, imageName: tileDescription.imageName, mineCount: mineCount))
+                        .accessibilityLabel(tileDescription.localizedDescription)
                         .accessibilityIdentifier("Tile (\(x),\(y))")
                     }
                 }
@@ -38,100 +38,20 @@ struct GridView: View {
     }
 }
 
-enum TileDescription {
-    case covered
-    case uncoveredEmpty
-    case uncoveredMine
-    case mine
-    case uncovered(mineCount: Int)
-    case flag
-    case questionMark
-
-    var imageName: String {
-        switch self {
-        case .covered:
-            return "Covered"
-        case .uncoveredEmpty:
-            return "Uncovered"
-        case .uncovered(let mineCount):
-            return String(mineCount)
-        case .uncoveredMine:
-            return "MineClicked"
-        case .mine:
-            return "Mine"
-        case .flag:
-            return "Flag"
-        case .questionMark:
-            return "QuestionMark"
-        }
-    }
-
-    var localizedDescription: String {
-        switch self {
-        case .covered:
-            return String(localized: "Covered", comment: "Accessibility description of a tile")
-        case .uncoveredEmpty:
-            return String(localized: "Empty", comment: "Accessibility description of a tile")
-        case .uncoveredMine:
-            return String(localized: "Mine", comment: "Accessibility description of a tile")
-        case .mine:
-            return String(localized: "Mine", comment: "Accessibility description of a tile")
-        case .uncovered(let mineCount):
-            return String(localized: "\(mineCount) mines nearby", comment: "Accessibility description of a tile")
-        case .flag:
-            return String(localized: "Flag", comment: "Accessibility description of a tile")
-        case .questionMark:
-            return String(localized: "Question mark", comment: "Accessibility description of a tile")
-        }
-    }
-}
-
 private struct TileButtonStyle: ButtonStyle {
     let tile: MinesweeperTile
+    let imageName: String
     let mineCount: Int
 
     func makeBody(configuration: Configuration) -> some View {
         Rectangle()
             .fill(Color("lightGray"))
             .overlay {
-                Image(descriptionForTile(tile, mineCount: mineCount, isPressed: configuration.isPressed).imageName)
+                Image(imageName)
                     .interpolation(.none)
                     .resizable()
                     .scaledToFit()
             }
-    }
-}
-
-private func descriptionForTile(_ tile: MinesweeperTile, mineCount: Int, isPressed: Bool) -> TileDescription {
-    switch tile.state {
-    case .hidden:
-        if isPressed {
-            return .uncoveredEmpty
-        } else {
-            return .covered
-        }
-    case .exposed:
-        switch tile.content {
-        case .mine:
-            return .mine
-        case .empty:
-            if mineCount == 0 {
-                return .uncoveredEmpty
-            } else {
-                return .uncovered(mineCount: mineCount)
-            }
-        }
-    case .exposedMine:
-        switch tile.content {
-        case .mine:
-            return .uncoveredMine
-        case .empty:
-            return .uncoveredEmpty
-        }
-    case .flagged:
-        return .flag
-    case .questionMark:
-        return .questionMark
     }
 }
 
