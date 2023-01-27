@@ -11,7 +11,7 @@ import SwiftUI
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     @Binding var isGameOver: Bool
-    var flagMode: Bool = false
+    let flagMode: Bool
 
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {

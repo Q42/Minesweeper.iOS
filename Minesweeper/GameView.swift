@@ -16,8 +16,6 @@ struct GameView: View {
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     @State var flagMode: Bool = false
     
-    
-    
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
         let height = tileSize * CGFloat(grid.height)
