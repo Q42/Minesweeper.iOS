@@ -31,10 +31,16 @@ private struct GameEndedView: View {
                         Text(title)
                             .font(.title)
                     }
-
+                    #if(os(watchOS))
                     Button("Play again") {
                         playAgain()
                     }
+                    #endif
+                    #if(os(iOS))
+                    Button("Play again") {
+                        playAgain()
+                    }
+                    #endif
                     Button("View board") {
                         dismiss()
                     }
@@ -43,6 +49,7 @@ private struct GameEndedView: View {
                 .frame(minHeight: geometry.size.height)
             }
         }
+        .frame(minWidth: 200, minHeight: 200)
     }
 }
 
