@@ -31,6 +31,7 @@
 		D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */; };
 		D5F5A9A02983FC4B001C2A0E /* TileDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */; };
 		D5F5A9A12983FC4B001C2A0E /* TileDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */; };
+		D5F5A9A3298400B3001C2A0E /* CustomGameForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		D5D493182940EA0C00BD74B7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D5F1B7E52949BA4D00FC9AA9 /* Grid2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid2D.swift; sourceTree = "<group>"; };
 		D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescription.swift; sourceTree = "<group>"; };
+		D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			children = (
 				D5AC8C77294C7E0000D7C094 /* Info.plist */,
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
+				D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */,
 				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
 				D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */,
@@ -378,6 +381,7 @@
 				D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
 				D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */,
+				D5F5A9A3298400B3001C2A0E /* CustomGameForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

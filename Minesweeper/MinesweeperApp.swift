@@ -12,6 +12,7 @@ struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
     @State var isPresentingGame: Bool = false
+    @State var isPresentingCustomSheet: Bool = false
     @State var isGameOver: Bool = false
 
     init() {
@@ -32,6 +33,13 @@ struct MinesweeperApp: App {
                 #if os(macOS)
                 GameView(grid: $grid, isGameOver: $isGameOver)
                     .navigationTitle(Text("Minesweeper", comment: "App title bar"))
+                    .sheet(isPresented: $isPresentingCustomSheet) {
+                        CustomGameForm { configuration in
+                            isPresentingCustomSheet = false
+                            newGame(for: configuration)
+                        }
+                        .padding()
+                    }
                 #else
                 List {
                     Section("New game") {
@@ -43,6 +51,19 @@ struct MinesweeperApp: App {
                         }
                         Button("Expert") {
                             newGame(for: .expert)
+                        }
+                        Button("Custom") {
+                            isPresentingCustomSheet = true
+                        }
+                        .sheet(isPresented: $isPresentingCustomSheet) {
+                            NavigationStack {
+                                CustomGameForm { configuration in
+                                    isPresentingCustomSheet = false
+                                    newGame(for: configuration)
+                                }
+                                .navigationTitle("Custom game")
+                                .navigationBarTitleDisplayMode(.inline)
+                            }
                         }
                     }
                 }
@@ -65,6 +86,9 @@ struct MinesweeperApp: App {
                     }
                     Button("Expert") {
                         newGame(for: .expert)
+                    }
+                    Button("Custom") {
+                        isPresentingCustomSheet = true
                     }
                 }
             }
