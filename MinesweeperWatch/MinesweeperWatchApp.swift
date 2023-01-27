@@ -11,9 +11,14 @@ import SwiftUI
 @main
 struct MinesweeperWatchApp: App {
     let gridFactory: GridFactory
+    @State var grid: MinesweeperGrid
+    @State var state: MinesweeperState?
+    @State var isPresentingGame: Bool = false
 
     init() {
         gridFactory = RandomGridFactory()
+        let grid = gridFactory.makeGrid(for: GameConfiguration.default)
+        self._grid = .init(initialValue: grid)
     }
 
     var body: some Scene {
@@ -21,15 +26,32 @@ struct MinesweeperWatchApp: App {
             NavigationStack {
                 List {
                     Section("New game") {
-                        NavigationLink("Beginner", value: GameConfiguration.beginner)
-                        NavigationLink("Intermediate", value: GameConfiguration.intermediate)
-                        NavigationLink("Expert", value: GameConfiguration.expert)
+                        Button("Beginner") {
+                            newGame(for: .beginner)
+                        }
+                        Button("Intermediate") {
+                            newGame(for: .intermediate)
+                        }
+                        Button("Expert") {
+                            newGame(for: .expert)
+                        }
                     }
                 }
-                .navigationDestination(for: GameConfiguration.self) { configuration in
-                    GameView(grid: gridFactory.makeGrid(for: configuration))
+                .navigationDestination(isPresented: $isPresentingGame) {
+                    GameView(grid: $grid, state: $state, playAgain: { clearState() })
                 }
             }
         }
+    }
+
+    func newGame(for configuraton: GameConfiguration) {
+        grid = gridFactory.makeGrid(for: configuraton)
+        isPresentingGame = true
+        state = nil
+    }
+
+    func clearState() {
+        isPresentingGame = false
+        state = nil
     }
 }

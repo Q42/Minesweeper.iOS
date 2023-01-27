@@ -11,9 +11,9 @@ import SwiftUI
 struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
+    @State var state: MinesweeperState?
     @State var isPresentingGame: Bool = false
-    @State var isPresentingCustomSheet: Bool = false
-    @State var isGameOver: Bool = false
+    @State var isPresentingCustomGameSheet: Bool = false
 
     init() {
         let seed = UserDefaults.standard.string(forKey: "seed")
@@ -31,7 +31,7 @@ struct MinesweeperApp: App {
         WindowGroup {
             NavigationStack {
                 #if os(macOS)
-                GameView(grid: $grid, isGameOver: $isGameOver)
+                GameView(grid: $grid, state: $state, playAgain: { clearState() })
                     .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                     .sheet(isPresented: $isPresentingCustomSheet) {
                         CustomGameForm { configuration in
@@ -53,12 +53,12 @@ struct MinesweeperApp: App {
                             newGame(for: .expert)
                         }
                         Button("Custom") {
-                            isPresentingCustomSheet = true
+                            isPresentingCustomGameSheet = true
                         }
-                        .sheet(isPresented: $isPresentingCustomSheet) {
+                        .sheet(isPresented: $isPresentingCustomGameSheet) {
                             NavigationStack {
                                 CustomGameForm { configuration in
-                                    isPresentingCustomSheet = false
+                                    isPresentingCustomGameSheet = false
                                     newGame(for: configuration)
                                 }
                                 .navigationTitle("Custom game")
@@ -69,7 +69,8 @@ struct MinesweeperApp: App {
                 }
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                 .navigationDestination(isPresented: $isPresentingGame) {
-                    GameView(grid: $grid, isGameOver: $isGameOver).navigationBarBackButtonHidden()
+                    GameView(grid: $grid, state: $state, playAgain: { clearState() })
+                        .navigationBarBackButtonHidden()
                 }
                 #endif
             }
@@ -88,7 +89,7 @@ struct MinesweeperApp: App {
                         newGame(for: .expert)
                     }
                     Button("Custom") {
-                        isPresentingCustomSheet = true
+                        isPresentingCustomGameSheet = true
                     }
                 }
             }
@@ -98,6 +99,11 @@ struct MinesweeperApp: App {
     func newGame(for configuraton: GameConfiguration) {
         grid = gridFactory.makeGrid(for: configuraton)
         isPresentingGame = true
-        isGameOver = false
+        state = nil
+    }
+
+    func clearState() {
+        isPresentingGame = false
+        state = nil
     }
 }

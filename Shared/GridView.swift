@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var isGameOver: Bool
+    @Binding var state: MinesweeperState?
     let flagMode: Bool
 
     var body: some View {
@@ -23,12 +23,18 @@ struct GridView: View {
                         let tileDescription = TileDescription(tile, mineCount: mineCount, isPressed: false)
 
                         Button(tileDescription.localizedDescription) {
-                            if flagMode{
+                            // Can't tap when the game is already over
+                            guard grid.state == nil else { return }
+
+                            // Perform the user's action
+                            if flagMode {
                                 grid.flagTile(x: x, y: y)
+                            } else {
+                                grid.selectTile(x: x, y: y)
                             }
-                            else {
-                                isGameOver = grid.selectTile(x: x, y: y)
-                            }
+
+                            // Update the game state (won/lost)
+                            state = grid.state
                         }
                         .buttonStyle(TileButtonStyle(tile: tile, imageName: tileDescription.imageName, mineCount: mineCount))
                         .accessibilityLabel(tileDescription.localizedDescription)
@@ -69,11 +75,11 @@ struct GridView_Previews: PreviewProvider {
     #endif
 
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var isGameOver = false
+    @State static var state: MinesweeperState?
     static let tileSize: CGFloat = 30
 
     static var previews: some View {
-        GridView(grid: $grid, isGameOver: $isGameOver, flagMode: false)
+        GridView(grid: $grid, state: $state, flagMode: false)
             .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
     }
 }
