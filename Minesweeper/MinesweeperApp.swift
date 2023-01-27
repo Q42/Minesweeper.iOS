@@ -33,9 +33,9 @@ struct MinesweeperApp: App {
                 #if os(macOS)
                 GameView(grid: $grid, state: $state, playAgain: { clearState() })
                     .navigationTitle(Text("Minesweeper", comment: "App title bar"))
-                    .sheet(isPresented: $isPresentingCustomSheet) {
+                    .sheet(isPresented: $isPresentingCustomGameSheet) {
                         CustomGameForm { configuration in
-                            isPresentingCustomSheet = false
+                            isPresentingCustomGameSheet = false
                             newGame(for: configuration)
                         }
                         .padding()

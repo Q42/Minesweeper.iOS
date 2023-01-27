@@ -36,6 +36,7 @@
 		D5F5A9A3298400B3001C2A0E /* CustomGameForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */; };
 		D5F5A9BE298422C6001C2A0E /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */; };
 		D5F5A9BF298422C6001C2A0E /* GameEndedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */; };
+		D5F5A9C8298430E0001C2A0E /* CustomGameForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F5A9C7298430E0001C2A0E /* CustomGameForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		D5F5A99F2983FC4B001C2A0E /* TileDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDescription.swift; sourceTree = "<group>"; };
 		D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameForm.swift; sourceTree = "<group>"; };
 		D5F5A9BD298422C6001C2A0E /* GameEndedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEndedView.swift; sourceTree = "<group>"; };
+		D5F5A9C7298430E0001C2A0E /* CustomGameForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */,
 				D5BD656129322B9E00247DDE /* GameView.swift */,
 				D5BD657129322D8C00247DDE /* RandomGridFactory.swift */,
+				D5F5A9C7298430E0001C2A0E /* CustomGameForm.swift */,
 				D5BD656529322B9F00247DDE /* Preview Content */,
 			);
 			path = MinesweeperWatch;
@@ -420,6 +423,7 @@
 			files = (
 				D5BD657529322E7800247DDE /* RandomGridFactory.swift in Sources */,
 				D5BD656229322B9E00247DDE /* GameView.swift in Sources */,
+				D5F5A9C8298430E0001C2A0E /* CustomGameForm.swift in Sources */,
 				D5F5A9A12983FC4B001C2A0E /* TileDescription.swift in Sources */,
 				D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */,
 				D5F1B7E72949BA4D00FC9AA9 /* Grid2D.swift in Sources */,

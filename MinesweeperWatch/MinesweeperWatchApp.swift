@@ -14,6 +14,7 @@ struct MinesweeperWatchApp: App {
     @State var grid: MinesweeperGrid
     @State var state: MinesweeperState?
     @State var isPresentingGame: Bool = false
+    @State var isPresentingCustomGameSheet: Bool = false
 
     init() {
         gridFactory = RandomGridFactory()
@@ -35,6 +36,19 @@ struct MinesweeperWatchApp: App {
                         Button("Expert") {
                             newGame(for: .expert)
                         }
+                        Button("Custom") {
+                            isPresentingCustomGameSheet = true
+                        }
+                    }
+                }
+                .sheet(isPresented: $isPresentingCustomGameSheet) {
+                    NavigationStack {
+                        CustomGameForm { configuration in
+                            isPresentingCustomGameSheet = false
+                            newGame(for: configuration)
+                        }
+                        .navigationTitle("Custom game")
+                        .navigationBarTitleDisplayMode(.inline)
                     }
                 }
                 .navigationDestination(isPresented: $isPresentingGame) {
