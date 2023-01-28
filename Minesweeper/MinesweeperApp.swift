@@ -66,8 +66,10 @@ struct MinesweeperApp: App {
                             }
                         }
                     }
-                    NavigationLink("About"){
-                        AboutView()
+
+                    Section {
+                        NavigationLink("How to play", destination: LearnView())
+                        NavigationLink("About", destination: AboutView())
                     }
                 }
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))

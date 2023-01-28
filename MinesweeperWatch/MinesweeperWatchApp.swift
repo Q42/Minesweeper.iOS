@@ -40,6 +40,11 @@ struct MinesweeperWatchApp: App {
                             isPresentingCustomGameSheet = true
                         }
                     }
+
+                    Section {
+                        NavigationLink("How to play", destination: LearnView())
+                        NavigationLink("About", destination: AboutView())
+                    }
                 }
                 .sheet(isPresented: $isPresentingCustomGameSheet) {
                     NavigationStack {
