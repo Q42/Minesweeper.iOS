@@ -43,13 +43,15 @@ struct GameView: View {
                 GameOverView(playAgain: playAgain)
             }
         }
+        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))")
 #if os(macOS)
         // Set minimum window size
         .frame(
             minWidth: width, maxWidth: .infinity,
             minHeight: height, maxHeight: .infinity
         )
-#endif
+#elseif os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
         .gesture(
             MagnificationGesture()
                 .onChanged { value in
@@ -57,10 +59,6 @@ struct GameView: View {
                     scale = value
                 }
         )
-
-        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))")
-#if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
 #endif
         .toolbar {
 #if os(iOS)

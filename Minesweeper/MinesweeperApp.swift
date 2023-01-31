@@ -29,18 +29,18 @@ struct MinesweeperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                #if os(macOS)
-                GameView(grid: $grid, state: $state, playAgain: { clearState() })
-                    .navigationTitle(Text("Minesweeper", comment: "App title bar"))
-                    .sheet(isPresented: $isPresentingCustomGameSheet) {
-                        CustomGameForm { configuration in
-                            isPresentingCustomGameSheet = false
-                            newGame(for: configuration)
-                        }
-                        .padding()
+#if os(macOS)
+            GameView(grid: $grid, state: $state, playAgain: { clearState() })
+                .navigationTitle(Text("Minesweeper", comment: "App title bar"))
+                .sheet(isPresented: $isPresentingCustomGameSheet) {
+                    CustomGameForm { configuration in
+                        isPresentingCustomGameSheet = false
+                        newGame(for: configuration)
                     }
-                #else
+                    .padding()
+                }
+#else
+            NavigationStack {
                 List {
                     Section("New game") {
                         Button("Beginner") {
@@ -77,8 +77,8 @@ struct MinesweeperApp: App {
                     GameView(grid: $grid, state: $state, playAgain: { clearState() })
                         .navigationBarBackButtonHidden()
                 }
-                #endif
             }
+#endif
         }
         .commands {
             CommandGroup(replacing: .newItem) {
