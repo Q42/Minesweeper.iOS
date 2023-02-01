@@ -79,6 +79,8 @@ struct MinesweeperApp: App {
                 }
                 #endif
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("GameWindow")
         }
         .commands {
             CommandGroup(replacing: .newItem) {

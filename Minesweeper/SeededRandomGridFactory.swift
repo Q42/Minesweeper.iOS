@@ -32,9 +32,8 @@ struct SeededRandomGridFactory: GridFactory {
         let empty = MinesweeperTile(state: .hidden, content: .empty)
 
         var grid: [MinesweeperTile] = Array(repeating: mine, count: configuration.minesCount) + Array(repeating: empty, count: emptyCount)
-        if let shuffled = randomSource.arrayByShufflingObjects(in: grid) as? [MinesweeperTile] {
-            grid = shuffled
-        }
+        let shuffled = randomSource.arrayByShufflingObjects(in: grid) as! [MinesweeperTile]
+        grid = shuffled
         return MinesweeperGrid(
             width: configuration.width,
             height: configuration.height,
