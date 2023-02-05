@@ -94,6 +94,8 @@ struct GameView: View {
                 }
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("GameView")
     }
 }
 

@@ -39,6 +39,8 @@ struct MinesweeperApp: App {
                     }
                     .padding()
                 }
+                .accessibilityElement(children: .contain)
+                .accessibilityIdentifier("GameWindow")
 #else
             NavigationStack {
                 List {
@@ -78,6 +80,8 @@ struct MinesweeperApp: App {
                         .navigationBarBackButtonHidden()
                 }
             }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("GameWindow")
 #endif
         }
         .commands {
