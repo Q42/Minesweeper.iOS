@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "CF6A0931-96B4-4EF0-9BEF-BE23C2974CD8",
+      "name" : "English",
+      "options" : {
+        "language" : "en",
+        "region" : "US"
+      }
+    },
+    {
+      "enabled" : false,
+      "id" : "7782E87D-A072-4017-88BB-17C366F2746C",
+      "name" : "Dutch",
+      "options" : {
+        "language" : "nl",
+        "region" : "NL"
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Minesweeper.xcodeproj",
+        "identifier" : "D589B4C12927AB7600A7FC24",
+        "name" : "MinesweeperUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

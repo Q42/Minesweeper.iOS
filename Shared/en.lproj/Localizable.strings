@@ -7,3 +7,5 @@
 "learn.part.4" = "Once you have used the numbers to figure out which squares are safe and which contain mines, you can mark the mined squares with a flag to remind yourself that they contain a mine. You can use the **flag button** in the toolbar to toggle between uncovering and flagging when you tap a square.";
 
 "learn.part.5" = "Once you have flagged all of the mines, you can uncover the remaining squares and win the game.";
+
+"https://q42.nl/" = "https://q42.nl/en/";

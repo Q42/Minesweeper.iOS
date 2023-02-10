@@ -10,14 +10,20 @@ import XCTest
 
 class MinesweeperTests: XCTestCase {
     func testMakeGrid() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         let factory = SeededRandomGridFactory(seed: "testing".data(using: .utf8))
         let grid = factory.makeGrid(for: .beginner)
         XCTAssertEqual(grid.width, 9)
         XCTAssertEqual(grid.height, 9)
+    }
+
+    func testMakeGridWithSeed() throws {
+        let seed = "testing".data(using: .utf8)
+
+        let factory1 = SeededRandomGridFactory(seed: seed)
+        let grid1 = factory1.makeGrid(for: .beginner)
+
+        let factory2 = SeededRandomGridFactory(seed: seed)
+        let grid2 = factory2.makeGrid(for: .beginner)
+        XCTAssertEqual(grid1, grid2)
     }
 }

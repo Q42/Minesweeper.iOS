@@ -44,6 +44,7 @@ private struct GameEndedView: View {
                     Button("View board") {
                         dismiss()
                     }
+                    .accessibilityIdentifier("View board")
                 }
                 .frame(width: geometry.size.width)
                 .frame(minHeight: geometry.size.height)

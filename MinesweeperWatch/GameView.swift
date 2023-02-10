@@ -23,6 +23,7 @@ struct GameView: View {
     var body: some View {
         VStack {
             Toggle("Flag", isOn: $flagMode)
+                .accessibilityIdentifier("Flag")
 
             let width = tileSize * CGFloat(grid.width)
             let height = tileSize * CGFloat(grid.height)

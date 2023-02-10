@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+set -e
+
+if ! command -v xcparse &> /dev/null
+then
+    echo "xcparse could not be found. Please install it: brew install chargepoint/xcparse/xcparse"
+    exit 1
+fi
+
+if ! command -v convert &> /dev/null
+then
+    echo "ImageMagick could not be found. Please install it: brew install imagemagick"
+    exit 1
+fi
+
+rm -rf ./Screenshots_macOS.xcresult
+rm -rf ./screenshots/Mac*
+
+# echo "Taking screenshots for macOS..."
+xcodebuild \
+-project Minesweeper.xcodeproj \
+-scheme "Minesweeper" \
+-destination "platform=macOS" \
+-resultBundlePath "./Screenshots_macOS.xcresult" \
+-testPlan Screenshots \
+test
+
+xcparse screenshots --os --model --test-plan-config "./Screenshots_macOS.xcresult" "./screenshots/"
+
+# Remove alpha channel from the screenshots, otherwise the App Store will reject them
+find ./screenshots -name "*.png" -exec convert "{}" -alpha off "{}" \;

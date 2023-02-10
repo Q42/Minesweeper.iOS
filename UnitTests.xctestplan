@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "63E244D3-8098-4324-A6EB-DA8DDDCB06EA",
+      "name" : "English",
+      "options" : {
+        "language" : "en",
+        "region" : "US"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Minesweeper.xcodeproj",
+        "identifier" : "D589B4B72927AB7600A7FC24",
+        "name" : "MinesweeperTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Minesweeper.xcodeproj",
+        "identifier" : "D589B4C12927AB7600A7FC24",
+        "name" : "MinesweeperUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

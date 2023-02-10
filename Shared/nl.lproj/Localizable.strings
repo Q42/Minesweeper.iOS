@@ -2,16 +2,28 @@
 "%lld mines nearby" = "%lld mijnen in de buurt";
 
 /* No comment provided by engineer. */
+"About" = "Over";
+
+/* No comment provided by engineer. */
 "Beginner" = "Beginner";
 
 /* No comment provided by engineer. */
 "Board" = "Bord";
+
+/* No comment provided by engineer. */
+"Board height" = "Bord hoogte";
+
+/* No comment provided by engineer. */
+"Board width" = "Bord breedte";
 
 /* Accessibility description of a tile */
 "Covered" = "Bedekt";
 
 /* No comment provided by engineer. */
 "Custom" = "Op maat";
+
+/* No comment provided by engineer. */
+"Custom game" = "Spel op maat";
 
 /* Accessibility description of a tile */
 "Empty" = "Leeg";
@@ -22,6 +34,8 @@
 /* Accessibility description of a tile */
 "Flag" = "Vlag";
 
+"Remove Flag" = "Verwijder Vlag";
+
 /* No comment provided by engineer. */
 "Height" = "Hoogte";
 
@@ -29,7 +43,25 @@
 "Height: %lld" = "Hoogte: %lld";
 
 /* No comment provided by engineer. */
+"How to play" = "Spelregels";
+
+/* No comment provided by engineer. */
 "Intermediate" = "Gemiddeld";
+
+/* (No Comment) */
+"learn.part.1" = "Mijnenveger is een klassiek spel van logica en strategie. Het doel van het spel is om alle vakjes op het bord te onthullen zonder dat je een mijn hebt geraakt.";
+
+/* (No Comment) */
+"learn.part.2" = "Om te spelen begin je door op een vakje op het bord te tikken. Als het een mijn bevat is het spel voorbij en heb je verloren. Als het geen mijn bevat, zal er een getal worden getoond. Dit getal geeft aan hoeveel mijnen er zijn in de 8 omliggende vakjes.";
+
+/* (No Comment) */
+"learn.part.3" = "Met logica kun je dit getal gebruiken om te bepalen welke vakjes mijnen bevatten en welke niet. Je kunt vervolgens op de veilige vakjes tikken om meer getallen te onthullen.";
+
+/* (No Comment) */
+"learn.part.4" = "Je gebruikt de getallen op de vakjes om te bepalen welke vakjes veilig zijn en welke mijnen bevatten. Je kunt vakjes met mijnen makers met een vlag als herinnering voor jezelf dat daar een mijn ligt. Je kunt de **vlag knop** in de bovenste balk gebruiken om te wisselen tussen het onthullen en vlaggen wanneer je op een vakje tikt.";
+
+/* (No Comment) */
+"learn.part.5" = "Wanneer je alle mijnen gevlagd hebt, kun je de resterende vakjes onthullen om het spel te winnen.";
 
 /* Accessibility description of a tile */
 "Mine" = "Mijn";
@@ -49,11 +81,20 @@
 /* No comment provided by engineer. */
 "New game" = "Nieuw spel";
 
+/* No comment provided by engineer. */
+"Play again" = "Speel opnieuw";
+
 /* Accessibility description of a tile */
 "Question mark" = "Vraagteken";
 
 /* No comment provided by engineer. */
 "Start game" = "Start spel";
+
+/* No comment provided by engineer. */
+"View board" = "Bekijk bord";
+
+/* No comment provided by engineer. */
+"We are Kalle & Mathijs. As a passion project we wanted to make a dedicated minesweeper app for Apple devices. As a way to learn more about app making, and to make a free game that doesn't bombard users with advertisements. We hope you enjoy our app!" = "Wij zijn Kalle & Mathijs. Als passieproject hebben wij een mijnveger app gemaakt voor Apple apparaten. Dit hebben we gedaan om meer over apps maken te leren. En om een gratis spel te maken dat gebruikers niet met advertenties bombardeert. Wij hopen dat jullie de app leuk vinden!";
 
 /* No comment provided by engineer. */
 "Width" = "Breedte";
@@ -62,8 +103,4 @@
 "Width: %lld" = "Breedte: %lld";
 
 /* No comment provided by engineer. */
-"About" = "About";
-
-/* No comment provided by engineer. */
-"We are Kalle & Mathijs. As a passion project we wanted to make a dedicated minesweeper app for apple devices. As a way to learn more about app making, and to make a free game that doesn't bombard users with advertisements. We hope you enjoy our app!" = "Wij zijn Kalle & Mathijs. Als passieproject hebben wij een mijnveger app gemaakt voor apple apparaten. Dit hebben we gedaan om meer over apps maken te leren. En om een gratis spel te maken dat gebruikers niet met advertenties bombardeert. Wij hopen dat jullie de app leuk vinden!";
-
+"You won!" = "Je hebt gewonnen!";
