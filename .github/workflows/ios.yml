@@ -15,17 +15,21 @@ jobs:
       scheme: "Minesweeper"
       destination: "platform=iOS Simulator,name=iPhone 14"
       test_plan: "UnitTests"
+      result_bundle_path: "MinesweeperUnitTests.xcresult"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        env:
-          platform: ${{ 'iOS Simulator' }}
         run: |
           xcodebuild build-for-testing -scheme "$scheme" -project "$project" -destination "$destination"
       - name: Test
-        env:
-          platform: ${{ 'iOS Simulator' }}
         run: |
-          xcodebuild test-without-building -scheme "$scheme" -project "$project" -destination "$destination" -testPlan "$test_plan"
+          xcodebuild test-without-building -scheme "$scheme" -project "$project" -destination "$destination" -testPlan "$test_plan" -resultBundlePath "$result_bundle_path"
+      - name: "Upload test results"
+        uses: actions/upload-artifact@v3
+        # Only keep the test result bundles when the tests have failed
+        if: ${{ failure() }}
+        with:
+          name: Minesweeper-test-results
+          path: ${{ env.result_bundle_path }}
