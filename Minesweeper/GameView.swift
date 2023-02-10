@@ -78,21 +78,24 @@ struct GameView: View {
                     }
                     
                 } label: {
-                    Image(systemName: "gear")
+                    Image(systemName: "chevron.backward")
                 }
+                .accessibilityIdentifier("Back")
+                .accessibilityLabel(Text("Back"))
             }
 #endif
             ToolbarItem {
                 Button {
                     flagMode.toggle()
                 } label: {
-                    if flagMode{
+                    if flagMode {
                         Image(systemName: "flag.slash.circle")
-                    }
-                    else{
+                    } else {
                         Image(systemName: "flag.circle")
                     }
                 }
+                .accessibilityIdentifier(flagMode ? "Remove Flag" : "Flag")
+                .accessibilityLabel(Text(flagMode ? "Remove Flag" : "Flag"))
             }
         }
         .accessibilityElement(children: .contain)

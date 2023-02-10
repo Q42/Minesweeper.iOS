@@ -40,7 +40,7 @@ xcodebuild \
 -destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1" \
 -destination "platform=iOS Simulator,name=iPad Pro (11-inch) (4th generation),OS=16.1" \
 -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=16.1" \
--destination "platform=iOS Simulator,name=iPad (9th generation),OS=16.1" \
+-destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (2nd generation),OS=16.1" \
 -resultBundlePath "./Screenshots_iOS.xcresult" \
 -testPlan Screenshots \
 -maximum-concurrent-test-device-destinations 4 \

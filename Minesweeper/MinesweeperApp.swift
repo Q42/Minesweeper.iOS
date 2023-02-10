@@ -48,15 +48,19 @@ struct MinesweeperApp: App {
                         Button("Beginner") {
                             newGame(for: .beginner)
                         }
+                        .accessibilityIdentifier("Beginner")
                         Button("Intermediate") {
                             newGame(for: .intermediate)
                         }
+                        .accessibilityIdentifier("Intermediate")
                         Button("Expert") {
                             newGame(for: .expert)
                         }
+                        .accessibilityIdentifier("Expert")
                         Button("Custom") {
                             isPresentingCustomGameSheet = true
                         }
+                        .accessibilityIdentifier("Custom")
                         .sheet(isPresented: $isPresentingCustomGameSheet) {
                             NavigationStack {
                                 CustomGameForm { configuration in
@@ -90,16 +94,20 @@ struct MinesweeperApp: App {
                     Button("Beginner") {
                         newGame(for: .beginner)
                     }
+                    .accessibilityIdentifier("Beginner")
                     .keyboardShortcut("n", modifiers: .command)
                     Button("Intermediate") {
                         newGame(for: .intermediate)
                     }
+                    .accessibilityIdentifier("intermediate")
                     Button("Expert") {
                         newGame(for: .expert)
                     }
+                    .accessibilityIdentifier("Expert")
                     Button("Custom") {
                         isPresentingCustomGameSheet = true
                     }
+                    .accessibilityIdentifier("Custom")
                 }
             }
         }

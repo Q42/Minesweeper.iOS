@@ -26,13 +26,6 @@
         "identifier" : "D589B4C12927AB7600A7FC24",
         "name" : "MinesweeperUITests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Minesweeper.xcodeproj",
-        "identifier" : "D54380E72993D63C00A9CCD6",
-        "name" : "MinesweeperWatchUITests"
-      }
     }
   ],
   "version" : 1
