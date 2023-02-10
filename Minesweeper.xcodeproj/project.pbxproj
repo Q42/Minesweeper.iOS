@@ -63,6 +63,8 @@
 /* Begin PBXFileReference section */
 		855699C7298420F1003C8FC6 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		855699C9298421CC003C8FC6 /* Q42.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q42.swift; sourceTree = "<group>"; };
+		D5424FB82993CFEF00A0C28D /* Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Screenshots.xctestplan; path = Shared/Screenshots.xctestplan; sourceTree = "<group>"; };
+		D576EFAF2996427C00B2E49C /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		D589B4A72927AB7500A7FC24 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperApp.swift; sourceTree = "<group>"; };
 		D589B4AC2927AB7500A7FC24 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,8 @@
 		D589B49E2927AB7500A7FC24 = {
 			isa = PBXGroup;
 			children = (
+				D5424FB82993CFEF00A0C28D /* Screenshots.xctestplan */,
+				D576EFAF2996427C00B2E49C /* UnitTests.xctestplan */,
 				D5D493182940EA0C00BD74B7 /* README.md */,
 				D5BD656D29322C0B00247DDE /* Shared */,
 				D589B4A92927AB7500A7FC24 /* Minesweeper */,

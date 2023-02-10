@@ -168,7 +168,7 @@ extension Grid2D where Tile == MinesweeperTile {
     }
 }
 
-struct MinesweeperTile {
+struct MinesweeperTile: Equatable {
     var state: State
     var content: Content
 

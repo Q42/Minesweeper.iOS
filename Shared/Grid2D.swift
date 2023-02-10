@@ -107,6 +107,8 @@ struct Grid2D<Tile> {
     }
 }
 
+extension Grid2D: Equatable where Tile: Equatable {}
+
 func printGrid<Tile>(_ grid: Grid2D<Tile>, formatter: (Tile) -> String) {
     for row in 0..<grid.height {
         let offset = row * grid.width

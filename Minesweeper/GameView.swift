@@ -30,6 +30,7 @@ struct GameView: View {
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
         }
+        .ignoresSafeArea(edges: .bottom)
         .onReceive(timer) { _ in
             if state == nil {
                 time += .seconds(1)

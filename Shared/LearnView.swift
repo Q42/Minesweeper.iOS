@@ -22,7 +22,7 @@ struct LearnView: View {
             .padding()
             .multilineTextAlignment(.leading)
         }
-        .navigationTitle("Learn to play")
+        .navigationTitle("How to play")
     }
 }
 

@@ -69,7 +69,7 @@ struct MinesweeperApp: App {
                         }
                     }
 
-                    Section {
+                    Section("Info") {
                         NavigationLink("How to play", destination: LearnView())
                         NavigationLink("About", destination: AboutView())
                     }

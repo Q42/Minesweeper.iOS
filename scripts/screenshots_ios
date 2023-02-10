@@ -1,0 +1,52 @@
+#!/bin/zsh
+
+set -e
+
+if ! command -v xcparse &> /dev/null
+then
+    echo "xcparse could not be found. Please install it: brew install chargepoint/xcparse/xcparse"
+    exit 1
+fi
+
+if ! command -v convert &> /dev/null
+then
+    echo "ImageMagick could not be found. Please install it: brew install imagemagick"
+    exit 1
+fi
+
+
+rm -rf ./Screenshots_iOS.xcresult
+# rm -rf ./screenshots/iPhone*
+# rm -rf ./screenshots/iPad*
+
+# Screenshot sizes reference:
+# https://help.apple.com/app-store-connect/#/devd274dd925
+#
+# iPhone 8 Plus -> 5.5-inch
+# iPhone 14 Plus -> 6.5-inch
+# iPhone 14 Pro -> 6.1-inch
+# iPhone 14 Pro Max -> 6.7-inch
+# iPad Pro (11-inch) (4th generation) -> 11-inch round corners
+# iPad Pro (12.9-inch) (6th generation) -> 12.9-inch round corners
+# iPad (9th generation) -> 10.5-inch square corners
+
+echo "Taking screenshots for iOS..."
+xcodebuild \
+-project Minesweeper.xcodeproj \
+-scheme "Minesweeper" \
+-destination "platform=iOS Simulator,name=iPhone 8 Plus,OS=16.1" \
+-destination "platform=iOS Simulator,name=iPhone 14 Plus,OS=16.1" \
+-destination "platform=iOS Simulator,name=iPhone 14 Pro,OS=16.1" \
+-destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1" \
+-destination "platform=iOS Simulator,name=iPad Pro (11-inch) (4th generation),OS=16.1" \
+-destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=16.1" \
+-destination "platform=iOS Simulator,name=iPad (9th generation),OS=16.1" \
+-resultBundlePath "./Screenshots_iOS.xcresult" \
+-testPlan Screenshots \
+-maximum-concurrent-test-device-destinations 4 \
+test
+
+xcparse screenshots --os --model --test-plan-config "./Screenshots_iOS.xcresult" "./screenshots/"
+
+# Remove alpha channel from the screenshots, otherwise the App Store will reject them
+find ./screenshots -name "*.png" -exec convert "{}" -alpha off "{}" \;
