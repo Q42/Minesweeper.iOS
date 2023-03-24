@@ -44,7 +44,20 @@ struct GameView: View {
                 GameOverView(playAgain: playAgain)
             }
         }
-        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem(placement: .principal){
+                HStack{
+                    Text("\(grid.totalMineTileCount-grid.totalFlaggedTileCount)")
+                    Text(" - ")
+                    Text("\(time.formatted(.time(pattern: .minuteSecond)))")
+                        .monospacedDigit()
+                }
+                .monospacedDigit()
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("\(grid.totalMineTileCount-grid.totalFlaggedTileCount), Mines remaining, you have been playing for \(time.description)")
+            }
+        }
 #if os(macOS)
         // Set minimum window size
         .frame(
