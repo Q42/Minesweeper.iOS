@@ -48,8 +48,10 @@ struct GameView: View {
         .toolbar{
             ToolbarItem(placement: .principal){
                 HStack{
+                    Image(systemName: "sun.min.fill")
                     Text("\(grid.totalMineTileCount-grid.totalFlaggedTileCount)")
                     Text(" - ")
+                    Image(systemName: "timer")
                     Text("\(time.formatted(.time(pattern: .minuteSecond)))")
                         .monospacedDigit()
                 }
