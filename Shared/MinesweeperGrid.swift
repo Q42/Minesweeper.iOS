@@ -111,7 +111,8 @@ extension Grid2D where Tile == MinesweeperTile {
     }
 
     /// Exposes all adjacent points to the given point that are zero, and then repeats the process for those points.
-    private mutating func markSweep(x: Int, y: Int) {
+    /// Returns: the number of connected tiles with zero
+    private mutating func markSweep(x: Int, y: Int) -> Int {
         let zeroes = findZeroesConnectedTo(x: x, y: y, newSet:Set<Point>())
         // We make a copy of the grid here to operate on, so we can freely mutate it and update ourselves only once.
         var newGrid = self
@@ -123,11 +124,16 @@ extension Grid2D where Tile == MinesweeperTile {
         }
         // Replace the contents of `self` with the updated grid.
         self = newGrid
+        
+        return zeroes.count
     }
     
-    mutating func selectTile(x: Int, y: Int) {
+    /// Selects a tile, uncovering it.
+    /// Returns: the number of connected tiles with zero
+    @discardableResult
+    mutating func selectTile(x: Int, y: Int) -> Int {
         guard self[x,y].state != .flagged && self[x,y].state != .questionMark else {
-            return
+            return 0
         }
 
         self[x, y].state = .exposed
@@ -137,8 +143,12 @@ extension Grid2D where Tile == MinesweeperTile {
             print("BOOM! Game over.")
             exposeAllMines()
             self[x, y].state = .exposedMine
+            return 1
         } else if mineCount(x: x, y: y) == 0 {
-            markSweep(x: x, y: y)
+            return markSweep(x: x, y: y)
+        }
+        else {
+            return 0
         }
     }
     

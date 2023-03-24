@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
@@ -24,6 +25,7 @@ struct GridView: View {
 
                         Button(tileDescription.localizedDescription) {
                             selectTile(x: x, y: y)
+                            
                         }
                         .buttonStyle(TileButtonStyle(tile: tile, imageName: tileDescription.imageName, mineCount: mineCount))
                         .accessibilityLabel(tileDescription.localizedDescription)
@@ -46,20 +48,33 @@ struct GridView: View {
         .background(Color("darkGray"))
         .font(.title)
     }
+    fileprivate func announceTilesUncovered(_ uncovered: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIAccessibility.post(notification: .announcement, argument: String(localized: "\(uncovered) tegels onthuld") as NSString)
+        }
+    }
     
-    func selectTile(x: Int, y: Int) {
+    /// Returns: the number of connected tiles with zero
+    @discardableResult
+    func selectTile(x: Int, y: Int) -> Int {
         // Can't tap when the game is already over
-        guard grid.state == .running else { return }
+        var uncovered: Int = 0
+        guard grid.state == .running else { return 0 }
 
         // Perform the user's action
         if flagMode {
             grid.flagTile(x: x, y: y)
         } else {
-            grid.selectTile(x: x, y: y)
+            uncovered = grid.selectTile(x: x, y: y)
+            if uncovered > 1
+            {
+                announceTilesUncovered(uncovered)
+            }
         }
 
         // Update the game state (won/lost)
         state = grid.state
+        return uncovered
     }
     
     func flagTile() {

@@ -17,9 +17,7 @@ struct GameView: View {
     @Environment(\.dismiss) var dismiss
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     @State var flagMode: Bool = false
-    @State var time: Duration = .zero
     @State var isPresentingGameOverSheet = false
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
@@ -32,11 +30,6 @@ struct GameView: View {
                 .frame(width: width * scale, height: height * scale)
         }
         .ignoresSafeArea(edges: .bottom)
-        .onReceive(timer) { _ in
-            if state == .running {
-                time += .seconds(1)
-            }
-        }
         .onChange(of: state) { state in
             if state != .running {
                 isPresentingGameOverSheet = true
@@ -50,22 +43,6 @@ struct GameView: View {
                 GameOverView(playAgain: playAgain)
             case .running:
                 EmptyView()
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
-            ToolbarItem(placement: .principal){
-                HStack{
-                    Image("custom.mine.fill")
-                    Text("\(grid.totalMineTileCount-grid.totalFlaggedTileCount)")
-                    Text(" - ")
-                    Image(systemName: "timer")
-                    Text("\(time.formatted(.time(pattern: .minuteSecond)))")
-                        .monospacedDigit()
-                }
-                .monospacedDigit()
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("\(grid.totalMineTileCount-grid.totalFlaggedTileCount), Mines remaining, you have been playing for \(time.description)")
             }
         }
 #if os(macOS)
@@ -84,7 +61,11 @@ struct GameView: View {
                 }
         )
 #endif
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal){
+                StatusView(state: state, grid: grid)
+            }
 #if os(iOS)
             ToolbarItem(placement: .navigationBarLeading) {
                 Menu {

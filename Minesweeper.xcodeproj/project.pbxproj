@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		855699C8298420F1003C8FC6 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C7298420F1003C8FC6 /* AboutView.swift */; };
 		855699CA298421CC003C8FC6 /* Q42.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C9298421CC003C8FC6 /* Q42.swift */; };
+		85AA138D29CDF78D0010D71D /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA138C29CDF78D0010D71D /* StatusView.swift */; };
 		D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */; };
 		D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AC2927AB7500A7FC24 /* GameView.swift */; };
 		D589B4AF2927AB7600A7FC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4AE2927AB7600A7FC24 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		855699C7298420F1003C8FC6 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		855699C9298421CC003C8FC6 /* Q42.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q42.swift; sourceTree = "<group>"; };
+		85AA138C29CDF78D0010D71D /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		D5424FB82993CFEF00A0C28D /* Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Screenshots.xctestplan; path = Shared/Screenshots.xctestplan; sourceTree = "<group>"; };
 		D576EFAF2996427C00B2E49C /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		D589B4A72927AB7500A7FC24 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
 				D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */,
 				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
+				85AA138C29CDF78D0010D71D /* StatusView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
 				D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */,
 				D589B4B12927AB7600A7FC24 /* Preview Content */,
@@ -399,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */,
+				85AA138D29CDF78D0010D71D /* StatusView.swift in Sources */,
 				D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */,
 				D5F5A9A02983FC4B001C2A0E /* TileDescription.swift in Sources */,
 				855699CA298421CC003C8FC6 /* Q42.swift in Sources */,
