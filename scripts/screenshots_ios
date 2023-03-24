@@ -34,16 +34,15 @@ echo "Taking screenshots for iOS..."
 xcodebuild \
 -project Minesweeper.xcodeproj \
 -scheme "Minesweeper" \
--destination "platform=iOS Simulator,name=iPhone 8 Plus,OS=16.1" \
--destination "platform=iOS Simulator,name=iPhone 14 Plus,OS=16.1" \
--destination "platform=iOS Simulator,name=iPhone 14 Pro,OS=16.1" \
--destination "platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.1" \
--destination "platform=iOS Simulator,name=iPad Pro (11-inch) (4th generation),OS=16.1" \
--destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation),OS=16.1" \
--destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (2nd generation),OS=16.1" \
+-destination "platform=iOS Simulator,name=iPhone 8 Plus" \
+-destination "platform=iOS Simulator,name=iPhone 14 Plus" \
+-destination "platform=iOS Simulator,name=iPhone 14 Pro" \
+-destination "platform=iOS Simulator,name=iPhone 14 Pro Max" \
+-destination "platform=iOS Simulator,name=iPad Pro (11-inch) (4th generation)" \
+-destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (6th generation)" \
+-destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (2nd generation)" \
 -resultBundlePath "./Screenshots_iOS.xcresult" \
 -testPlan Screenshots \
--maximum-concurrent-test-device-destinations 4 \
 test
 
 xcparse screenshots --os --model --test-plan-config "./Screenshots_iOS.xcresult" "./screenshots/"
