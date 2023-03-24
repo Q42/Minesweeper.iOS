@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var state: MinesweeperState?
+    @Binding var state: MinesweeperState
     let playAgain: () -> Void
 
     @State private var flagMode: Bool = false
@@ -52,7 +52,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static let factory = RandomGridFactory()
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var state: MinesweeperState?
+    @State static var state: MinesweeperState = .running
 
     static var previews: some View {
         GameView(grid: $grid, state: $state, playAgain: {})

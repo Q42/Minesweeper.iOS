@@ -9,43 +9,43 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var state: MinesweeperState?
+    @Binding var state: MinesweeperState
     let playAgain: () -> Void
 
     @State private var scale: CGFloat = 1.0
     @ScaledMetric private var tileSize: CGFloat = 44
     @Environment(\.dismiss) var dismiss
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
-    @State var flagMode: Bool = false
-    @State var time: Duration = .zero
     let spriteSet: AssetCatalogSpriteSet
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var flagMode: Bool = false
+    @State var isPresentingGameOverSheet = false
     
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: flagMode)
+            GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: $flagMode)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
         }
         .ignoresSafeArea(edges: .bottom)
-        .onReceive(timer) { _ in
-            if state == nil {
-                time += .seconds(1)
+        .onChange(of: state) { state in
+            if state != .running {
+                isPresentingGameOverSheet = true
             }
         }
-        .sheet(item: $state) { state in
+        .sheet(isPresented: $isPresentingGameOverSheet) {
             switch state {
             case .won:
                 GameWonView(playAgain: playAgain)
             case .gameOver:
                 GameOverView(playAgain: playAgain)
+            case .running:
+                EmptyView()
             }
         }
-        .navigationTitle("\(grid.totalMineTileCount-grid.totalFlaggedTileCount) - \(time.formatted(.time(pattern: .minuteSecond)))")
 #if os(macOS)
         // Set minimum window size
         .frame(
@@ -62,7 +62,11 @@ struct GameView: View {
                 }
         )
 #endif
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal){
+                StatusView(state: state, grid: grid)
+            }
 #if os(iOS)
             ToolbarItem(placement: .navigationBarLeading) {
                 Menu {
@@ -107,7 +111,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var state: MinesweeperState?
+    @State static var state: MinesweeperState = .running
     
     static var previews: some View {
         NavigationStack {

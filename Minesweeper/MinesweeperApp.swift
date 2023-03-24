@@ -11,7 +11,7 @@ import SwiftUI
 struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
-    @State var state: MinesweeperState?
+    @State var state: MinesweeperState = .running
     @State var spriteSet: AssetCatalogSpriteSet
     @State var isPresentingGame: Bool = false
     @State var isPresentingCustomGameSheet: Bool = false
@@ -126,11 +126,11 @@ struct MinesweeperApp: App {
     func newGame(for configuraton: GameConfiguration) {
         grid = gridFactory.makeGrid(for: configuraton)
         isPresentingGame = true
-        state = nil
+        state = .running
     }
 
     func clearState() {
         isPresentingGame = false
-        state = nil
+        state = .running
     }
 }
