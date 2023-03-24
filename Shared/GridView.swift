@@ -10,8 +10,8 @@ import SwiftUI
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var state: MinesweeperState?
-    let flagMode: Bool
+    @Binding var state: MinesweeperState
+    @Binding var flagMode: Bool
 
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
@@ -23,22 +23,20 @@ struct GridView: View {
                         let tileDescription = TileDescription(tile, mineCount: mineCount, isPressed: false)
 
                         Button(tileDescription.localizedDescription) {
-                            // Can't tap when the game is already over
-                            guard grid.state == nil else { return }
-
-                            // Perform the user's action
-                            if flagMode {
-                                grid.flagTile(x: x, y: y)
-                            } else {
-                                grid.selectTile(x: x, y: y)
-                            }
-
-                            // Update the game state (won/lost)
-                            state = grid.state
+                            selectTile(x: x, y: y)
                         }
                         .buttonStyle(TileButtonStyle(tile: tile, imageName: tileDescription.imageName, mineCount: mineCount))
                         .accessibilityLabel(tileDescription.localizedDescription)
                         .accessibilityIdentifier("Tile (\(x),\(y))")
+                        .accessibilityAction(named: Text("Plaats vlaggen")){
+                            flagMode = true
+                            selectTile(x: x, y:y)
+                        }
+                        .accessibilityAction(named: Text("Verwijder tegel")) {
+                            flagMode = false
+                            selectTile(x: x, y: y)
+                        }
+                        
                     }
                 }
             }
@@ -47,6 +45,26 @@ struct GridView: View {
         .accessibilityIdentifier("Grid")
         .background(Color("darkGray"))
         .font(.title)
+    }
+    
+    func selectTile(x: Int, y: Int) {
+        // Can't tap when the game is already over
+        guard grid.state == .running else { return }
+
+        // Perform the user's action
+        if flagMode {
+            grid.flagTile(x: x, y: y)
+        } else {
+            grid.selectTile(x: x, y: y)
+        }
+
+        // Update the game state (won/lost)
+        state = grid.state
+    }
+    
+    func flagTile() {
+        // Can't tap when the game is already over
+        guard grid.state == .running else { return }
     }
 }
 
@@ -75,11 +93,12 @@ struct GridView_Previews: PreviewProvider {
     #endif
 
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var state: MinesweeperState?
+    @State static var state: MinesweeperState = .running
+    @State static var flagMode: Bool = false
     static let tileSize: CGFloat = 30
 
     static var previews: some View {
-        GridView(grid: $grid, state: $state, flagMode: false)
+        GridView(grid: $grid, state: $state, flagMode: $flagMode)
             .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
     }
 }

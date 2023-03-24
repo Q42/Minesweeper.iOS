@@ -40,7 +40,7 @@ typealias MinesweeperGrid = Grid2D<MinesweeperTile>
 extension Grid2D where Tile == MinesweeperTile {
     /// Determines whether the game is in a won or lost condition.
     /// If the game is not won or lost yet, nil is returned.
-    var state: MinesweeperState? {
+    var state: MinesweeperState {
         // Check lose condition
         let anyMineIsExposed = memory.contains { tile in
             tile.state == .exposedMine
@@ -71,7 +71,7 @@ extension Grid2D where Tile == MinesweeperTile {
         if allMinesAreFlagged && nonMineTilesDontHaveFlags {
             return .won
         } else {
-            return nil
+            return .running
         }
     }
 
@@ -187,6 +187,8 @@ struct MinesweeperTile: Equatable {
 }
 
 enum MinesweeperState: Int, Identifiable {
-    case won, gameOver
+    case running
+    case won
+    case gameOver
     var id: Int { rawValue }
 }

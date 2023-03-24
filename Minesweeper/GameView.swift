@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @Binding var grid: MinesweeperGrid
-    @Binding var state: MinesweeperState?
+    @Binding var state: MinesweeperState
     let playAgain: () -> Void
 
     @State private var scale: CGFloat = 1.0
@@ -18,6 +18,7 @@ struct GameView: View {
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     @State var flagMode: Bool = false
     @State var time: Duration = .zero
+    @State var isPresentingGameOverSheet = false
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -25,30 +26,37 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, state: $state, flagMode: flagMode)
+            GridView(grid: $grid, state: $state, flagMode: $flagMode)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
         }
         .ignoresSafeArea(edges: .bottom)
         .onReceive(timer) { _ in
-            if state == nil {
+            if state == .running {
                 time += .seconds(1)
             }
         }
-        .sheet(item: $state) { state in
+        .onChange(of: state) { state in
+            if state != .running {
+                isPresentingGameOverSheet = true
+            }
+        }
+        .sheet(isPresented: $isPresentingGameOverSheet) {
             switch state {
             case .won:
                 GameWonView(playAgain: playAgain)
             case .gameOver:
                 GameOverView(playAgain: playAgain)
+            case .running:
+                EmptyView()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             ToolbarItem(placement: .principal){
                 HStack{
-                    Image(systemName: "sun.min.fill")
+                    Image("custom.mine.fill")
                     Text("\(grid.totalMineTileCount-grid.totalFlaggedTileCount)")
                     Text(" - ")
                     Image(systemName: "timer")
@@ -121,7 +129,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
     @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var state: MinesweeperState?
+    @State static var state: MinesweeperState = .running
     
     static var previews: some View {
         NavigationStack {
