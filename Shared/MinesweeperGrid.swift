@@ -136,6 +136,24 @@ extension Grid2D where Tile == MinesweeperTile {
             return 0
         }
 
+        // If this is the first uncovering of a tile
+        if memory.allSatisfy({ $0.state == .hidden }) {
+            // Check if the user hit a mine. If so, we swap it with the first square in the grid that is not a mine.
+            if self[x, y].content == .mine {
+                var destX = 0
+                var destY = 0
+                while self[destX, destY].content == .mine {
+                    destX += 1
+                    if destX > width {
+                        destX = 0
+                        destY += 1
+                    }
+                }
+                self[x, y] = .init(state: .exposed, content: .empty)
+                self[destX, destY] = .init(state: .hidden, content: .mine)
+            }
+        }
+
         self[x, y].state = .exposed
         let tile = self[x,y]
 

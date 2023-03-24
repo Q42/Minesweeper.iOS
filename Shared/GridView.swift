@@ -53,6 +53,7 @@ struct GridView: View {
         .background(Color("darkGray"))
         .font(.title)
     }
+
     fileprivate func announceTilesUncovered(_ uncovered: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             UIAccessibility.post(notification: .announcement, argument: String(localized: "\(uncovered) tegels onthuld") as NSString)
