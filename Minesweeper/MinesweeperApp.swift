@@ -36,7 +36,7 @@ struct MinesweeperApp: App {
     var body: some Scene {
         WindowGroup {
 #if os(macOS)
-            GameView(grid: $grid, state: $state, playAgain: { clearState() })
+            GameView(grid: $grid, state: $state, playAgain: { clearState() }, spriteSet: spriteSet)
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                 .sheet(isPresented: $isPresentingCustomGameSheet) {
                     CustomGameForm { configuration in

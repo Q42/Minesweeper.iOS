@@ -62,9 +62,8 @@ struct GameView: View {
                 }
         )
 #endif
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .principal){
+            ToolbarItem(placement: .principal) {
                 StatusView(state: state, grid: grid)
             }
 #if os(iOS)
@@ -90,17 +89,15 @@ struct GameView: View {
             }
 #endif
             ToolbarItem {
+                let flagButtonLabel = flagMode ? String(localized: "Remove Flag") : String(localized: "Flag")
                 Button {
                     flagMode.toggle()
                 } label: {
-                    if flagMode {
-                        Image(systemName: "flag.slash.circle")
-                    } else {
-                        Image(systemName: "flag.circle")
-                    }
+                    let flagButtonImage = flagMode ? "flag.slash.circle" : "flag.circle"
+                    Label(flagButtonLabel, systemImage: flagButtonImage)
                 }
-                .accessibilityIdentifier(flagMode ? "Remove Flag" : "Flag")
-                .accessibilityLabel(Text(flagMode ? "Remove Flag" : "Flag"))
+                .accessibilityIdentifier(flagButtonLabel)
+                .accessibilityLabel(flagButtonLabel)
             }
         }
         .accessibilityElement(children: .contain)

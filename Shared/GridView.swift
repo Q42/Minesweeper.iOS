@@ -7,7 +7,9 @@
 //
 
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#endif
 
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
@@ -55,9 +57,11 @@ struct GridView: View {
     }
 
     fileprivate func announceTilesUncovered(_ uncovered: Int) {
+        #if os(iOS)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             UIAccessibility.post(notification: .announcement, argument: String(localized: "\(uncovered) tegels onthuld") as NSString)
         }
+        #endif
     }
     
     /// Returns: the number of connected tiles with zero
