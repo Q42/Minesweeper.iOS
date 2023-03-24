@@ -11,6 +11,7 @@ import SwiftUI
 struct GridView: View {
     @Binding var grid: MinesweeperGrid
     @Binding var state: MinesweeperState?
+    let spriteSet: SpriteSet
     let flagMode: Bool
 
     var body: some View {
@@ -36,7 +37,11 @@ struct GridView: View {
                             // Update the game state (won/lost)
                             state = grid.state
                         }
-                        .buttonStyle(TileButtonStyle(tile: tile, imageName: tileDescription.imageName, mineCount: mineCount))
+                        .buttonStyle(TileButtonStyle(
+                            tile: tile,
+                            imageName: spriteSet.imageName(for: tileDescription),
+                            mineCount: mineCount
+                        ))
                         .accessibilityLabel(tileDescription.localizedDescription)
                         .accessibilityIdentifier("Tile (\(x),\(y))")
                     }
@@ -77,9 +82,10 @@ struct GridView_Previews: PreviewProvider {
     @State static var grid = factory.makeGrid(for: .beginner)
     @State static var state: MinesweeperState?
     static let tileSize: CGFloat = 30
+    static let spriteSet = AssetCatalogSpriteSet("Classic")
 
     static var previews: some View {
-        GridView(grid: $grid, state: $state, flagMode: false)
+        GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: false)
             .frame(width: tileSize * CGFloat(grid.width), height: tileSize * CGFloat(grid.height))
     }
 }

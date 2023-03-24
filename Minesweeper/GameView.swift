@@ -18,6 +18,7 @@ struct GameView: View {
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     @State var flagMode: Bool = false
     @State var time: Duration = .zero
+    let spriteSet: AssetCatalogSpriteSet
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -25,7 +26,7 @@ struct GameView: View {
         let height = tileSize * CGFloat(grid.height)
 
         ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, state: $state, flagMode: flagMode)
+            GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: flagMode)
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
@@ -110,7 +111,7 @@ struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            GameView(grid: $grid, state: $state, playAgain: {}) 
+            GameView(grid: $grid, state: $state, playAgain: {}, spriteSet: .default) 
         }
     }
 }
