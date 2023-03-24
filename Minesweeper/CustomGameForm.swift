@@ -34,7 +34,7 @@ struct CustomGameForm: View {
                 HStack {
                     Text("Mine count: \(minesCount)")
                     Spacer()
-                    Stepper("Mine count", value: $minesCount, in: 1...(width * height))
+                    Stepper("Mine count", value: $minesCount, in: 1...(width * height - 1))
                 }
             }.labelsHidden()
 

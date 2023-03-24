@@ -26,7 +26,7 @@ struct CustomGameForm: View {
             }
 
             Section("Mines") {
-                Stepper("\(minesCount)", value: $minesCount, in: 1...(width * height))
+                Stepper("\(minesCount)", value: $minesCount, in: 1...(width * height - 1))
             }
 
             Button("Start game") {
