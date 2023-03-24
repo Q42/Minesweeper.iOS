@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		855699C8298420F1003C8FC6 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C7298420F1003C8FC6 /* AboutView.swift */; };
 		855699CA298421CC003C8FC6 /* Q42.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855699C9298421CC003C8FC6 /* Q42.swift */; };
+		D5247699299A7612007330B8 /* SpriteSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5247698299A7612007330B8 /* SpriteSet.swift */; };
+		D524769A299A7612007330B8 /* SpriteSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5247698299A7612007330B8 /* SpriteSet.swift */; };
 		D589B4AB2927AB7500A7FC24 /* MinesweeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */; };
 		D589B4AD2927AB7500A7FC24 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4AC2927AB7500A7FC24 /* GameView.swift */; };
 		D589B4AF2927AB7600A7FC24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D589B4AE2927AB7600A7FC24 /* Assets.xcassets */; };
@@ -16,6 +18,7 @@
 		D589B4BD2927AB7600A7FC24 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4BC2927AB7600A7FC24 /* MinesweeperTests.swift */; };
 		D589B4C72927AB7600A7FC24 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */; };
 		D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */; };
+		D5B93F2229CDF47900B83B9B /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B93F2129CDF47900B83B9B /* ThemeView.swift */; };
 		D5BD656029322B9E00247DDE /* MinesweeperWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */; };
 		D5BD656229322B9E00247DDE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD656129322B9E00247DDE /* GameView.swift */; };
 		D5BD656729322B9F00247DDE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5BD656629322B9F00247DDE /* Preview Assets.xcassets */; };
@@ -63,6 +66,7 @@
 /* Begin PBXFileReference section */
 		855699C7298420F1003C8FC6 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		855699C9298421CC003C8FC6 /* Q42.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Q42.swift; sourceTree = "<group>"; };
+		D5247698299A7612007330B8 /* SpriteSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteSet.swift; sourceTree = "<group>"; };
 		D5424FB82993CFEF00A0C28D /* Screenshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Screenshots.xctestplan; path = Shared/Screenshots.xctestplan; sourceTree = "<group>"; };
 		D576EFAF2996427C00B2E49C /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		D589B4A72927AB7500A7FC24 /* Minesweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minesweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +81,7 @@
 		D589B4C62927AB7600A7FC24 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
 		D589B4D52927ADD800A7FC24 /* MinesweeperGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperGrid.swift; sourceTree = "<group>"; };
 		D5AC8C77294C7E0000D7C094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D5B93F2129CDF47900B83B9B /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		D5BD655D29322B9E00247DDE /* MinesweeperWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinesweeperWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5BD655F29322B9E00247DDE /* MinesweeperWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperWatchApp.swift; sourceTree = "<group>"; };
 		D5BD656129322B9E00247DDE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 			children = (
 				D5AC8C77294C7E0000D7C094 /* Info.plist */,
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
+				D5B93F2129CDF47900B83B9B /* ThemeView.swift */,
 				D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */,
 				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
@@ -226,6 +232,7 @@
 				855699C7298420F1003C8FC6 /* AboutView.swift */,
 				D5F5A9CA29844D9D001C2A0E /* LearnView.swift */,
 				D589B4AE2927AB7600A7FC24 /* Assets.xcassets */,
+				D5247698299A7612007330B8 /* SpriteSet.swift */,
 				D5D493112940E6BF00BD74B7 /* Localizable.strings */,
 				D5D493162940E6C600BD74B7 /* InfoPlist.strings */,
 			);
@@ -406,10 +413,12 @@
 				855699C8298420F1003C8FC6 /* AboutView.swift in Sources */,
 				D5F1B7E62949BA4D00FC9AA9 /* Grid2D.swift in Sources */,
 				D5F5A9CB29844D9D001C2A0E /* LearnView.swift in Sources */,
+				D5B93F2229CDF47900B83B9B /* ThemeView.swift in Sources */,
 				D5F5A9BE298422C6001C2A0E /* GameEndedView.swift in Sources */,
 				D5BD656C29322BC300247DDE /* GridView.swift in Sources */,
 				D589B4D62927ADD800A7FC24 /* MinesweeperGrid.swift in Sources */,
 				D5F5A9A3298400B3001C2A0E /* CustomGameForm.swift in Sources */,
+				D5247699299A7612007330B8 /* SpriteSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +454,7 @@
 				D5BD656F29322C9300247DDE /* GridView.swift in Sources */,
 				D5BD656E29322C9300247DDE /* MinesweeperGrid.swift in Sources */,
 				D5F5A9CF29845284001C2A0E /* Q42.swift in Sources */,
+				D524769A299A7612007330B8 /* SpriteSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

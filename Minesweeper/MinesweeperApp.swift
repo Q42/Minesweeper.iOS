@@ -12,10 +12,13 @@ struct MinesweeperApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
     @State var state: MinesweeperState?
+    @State var spriteSet: AssetCatalogSpriteSet
     @State var isPresentingGame: Bool = false
     @State var isPresentingCustomGameSheet: Bool = false
 
     init() {
+        let defaultTheme = "Classic Refined"
+        UserDefaults.standard.register(defaults: ["theme": defaultTheme])
         let seed = UserDefaults.standard.string(forKey: "seed")
         if let seed {
             print("Game was initialized using a fixed seed: \(seed)")
@@ -25,6 +28,9 @@ struct MinesweeperApp: App {
 
         self.gridFactory = gridFactory
         self._grid = .init(initialValue: grid)
+
+        let theme = UserDefaults.standard.string(forKey: "theme") ?? defaultTheme
+        self._spriteSet = .init(initialValue: AssetCatalogSpriteSet(theme))
     }
 
     var body: some Scene {
@@ -73,6 +79,10 @@ struct MinesweeperApp: App {
                         }
                     }
 
+                    Section("Settings") {
+                        NavigationLink("Theme", destination: ThemeView(selectedTheme: $spriteSet))
+                    }
+
                     Section("Info") {
                         NavigationLink("How to play", destination: LearnView())
                         NavigationLink("About", destination: AboutView())
@@ -80,7 +90,7 @@ struct MinesweeperApp: App {
                 }
                 .navigationTitle(Text("Minesweeper", comment: "App title bar"))
                 .navigationDestination(isPresented: $isPresentingGame) {
-                    GameView(grid: $grid, state: $state, playAgain: { clearState() })
+                    GameView(grid: $grid, state: $state, playAgain: { clearState() }, spriteSet: spriteSet)
                         .navigationBarBackButtonHidden()
                 }
             }

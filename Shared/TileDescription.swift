@@ -53,26 +53,6 @@ extension TileDescription {
         }
     }
 
-    /// Name of the image from the asset catalog that reflects the tile description
-    var imageName: String {
-        switch self {
-        case .covered:
-            return "Covered"
-        case .uncoveredEmpty:
-            return "Uncovered"
-        case .uncovered(let mineCount):
-            return String(mineCount)
-        case .uncoveredMine:
-            return "MineClicked"
-        case .mine:
-            return "Mine"
-        case .flag:
-            return "Flag"
-        case .questionMark:
-            return "Questionmark"
-        }
-    }
-
     /// Localized description of the tile
     var localizedDescription: String {
         switch self {
