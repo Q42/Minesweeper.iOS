@@ -33,7 +33,9 @@ struct GameView: View {
         .ignoresSafeArea(edges: .bottom)
         .onChange(of: state) { state in
             if state != .running {
-                isPresentingGameOverSheet = true
+                DispatchQueue.main.async {
+                    isPresentingGameOverSheet = true
+                }
             }
         }
         .sheet(isPresented: $isPresentingGameOverSheet) {
