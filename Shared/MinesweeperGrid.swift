@@ -50,25 +50,15 @@ extension Grid2D where Tile == MinesweeperTile {
         }
 
         // Check win condition
-
-        // Check if all mines have a flag
-        let mines = memory.filter { tile in
-            tile.content == .mine
-        }
-        let flaggedMines = mines.filter { tile in
-            tile.state == .flagged
-        }
-        let allMinesAreFlagged = mines.count == flaggedMines.count
-
-        // Check if all empty tiles *don't* have a flag
         let emptyTiles = memory.filter { tile in
             tile.content == .empty
         }
-        let nonMineTilesDontHaveFlags = emptyTiles.allSatisfy { tile in
-            tile.state != .flagged
+        
+        let uncoveredTiles = memory.filter { tile in
+            tile.state == .exposed
         }
 
-        if allMinesAreFlagged && nonMineTilesDontHaveFlags {
+        if  emptyTiles.count == uncoveredTiles.count {
             return .won
         } else {
             return .running
