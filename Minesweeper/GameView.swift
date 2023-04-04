@@ -29,6 +29,7 @@ struct GameView: View {
                 .frame(width: width, height: height)
                 .scaleEffect(x: scale, y: scale)
                 .frame(width: width * scale, height: height * scale)
+                .padding(40)
         }
         .ignoresSafeArea(edges: .bottom)
         .onChange(of: state) { state in
