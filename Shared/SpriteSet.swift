@@ -54,12 +54,14 @@ extension AssetCatalogSpriteSet: Identifiable {
 }
 
 extension AssetCatalogSpriteSet {
-    static let `default` = AssetCatalogSpriteSet("Classic Refined")
+    static let `default` = AssetCatalogSpriteSet("Modern")
 
     /// All supported image sets in the app
     static let all: [AssetCatalogSpriteSet] = [
         // The default one should come first
-        AssetCatalogSpriteSet("Classic Refined"),
+        AssetCatalogSpriteSet("Modern"),
         AssetCatalogSpriteSet("Classic"),
+        AssetCatalogSpriteSet("Modern Green"),
+        AssetCatalogSpriteSet("Modern Dark"),
     ]
 }
