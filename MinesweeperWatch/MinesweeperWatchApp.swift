@@ -13,10 +13,21 @@ struct MinesweeperWatchApp: App {
     let gridFactory: GridFactory
     @State var grid: MinesweeperGrid
     @State var state: MinesweeperState = .running
+    @State var spriteSet: AssetCatalogSpriteSet
     @State var isPresentingGame: Bool = false
     @State var isPresentingCustomGameSheet: Bool = false
 
     init() {
+        let defaultTheme = "Classic Refined"
+        UserDefaults.standard.register(defaults: ["theme": defaultTheme])
+        let seed = UserDefaults.standard.string(forKey: "seed")
+        if let seed {
+            print("Game was initialized using a fixed seed: \(seed)")
+        }
+
+        let theme = UserDefaults.standard.string(forKey: "theme") ?? defaultTheme
+        self._spriteSet = .init(initialValue: AssetCatalogSpriteSet(theme))
+
         gridFactory = RandomGridFactory()
         let grid = gridFactory.makeGrid(for: GameConfiguration.default)
         self._grid = .init(initialValue: grid)
@@ -41,6 +52,10 @@ struct MinesweeperWatchApp: App {
                         }
                     }
 
+                    Section("Settings") {
+                        NavigationLink("Theme", destination: ThemeView(selectedTheme: $spriteSet))
+                    }
+
                     Section {
                         NavigationLink("How to play", destination: LearnView())
                         NavigationLink("About", destination: AboutView())
@@ -57,7 +72,9 @@ struct MinesweeperWatchApp: App {
                     }
                 }
                 .navigationDestination(isPresented: $isPresentingGame) {
-                    GameView(grid: $grid, state: $state, playAgain: { clearState() })
+                    GameView(grid: $grid, state: $state, spriteSet: spriteSet, playAgain: {
+                        clearState()
+                    })
                 }
             }
         }

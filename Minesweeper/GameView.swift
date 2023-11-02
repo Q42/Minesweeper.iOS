@@ -17,20 +17,31 @@ struct GameView: View {
     @Environment(\.dismiss) var dismiss
     let scaleRange: ClosedRange<CGFloat> = 0.5...3.0
     let spriteSet: AssetCatalogSpriteSet
-    @State var flagMode: Bool = false
+    @State var flagMode: FlagMode = .uncoverTile
     @State var isPresentingGameOverSheet = false
     
     var body: some View {
         let width = tileSize * CGFloat(grid.width)
         let height = tileSize * CGFloat(grid.height)
 
-        ScrollView([.horizontal, .vertical]) {
-            GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: $flagMode)
-                .frame(width: width, height: height)
-                .scaleEffect(x: scale, y: scale)
-                .frame(width: width * scale, height: height * scale)
+        VStack {
+            Picker("Mode", selection: $flagMode) {
+                Text("Uncover tile")
+                    .tag(FlagMode.uncoverTile)
+                Text("Plant flag")
+                    .tag(FlagMode.plantFlag)
+            }
+            .pickerStyle(.segmented)
+            .padding()
+            .background(.regularMaterial)
+
+            ScrollView([.horizontal, .vertical]) {
+                GridView(grid: $grid, state: $state, spriteSet: spriteSet, flagMode: $flagMode)
+                    .frame(width: width, height: height)
+                    .scaleEffect(x: scale, y: scale)
+                    .frame(width: width * scale, height: height * scale)
+            }
         }
-        .ignoresSafeArea(edges: .bottom)
         .onChange(of: state) { state in
             if state != .running {
                 DispatchQueue.main.async {
@@ -90,31 +101,25 @@ struct GameView: View {
                 .accessibilityLabel(Text("Back"))
             }
 #endif
-            ToolbarItem {
-                let flagButtonLabel = flagMode ? String(localized: "Remove Flag") : String(localized: "Flag")
-                Button {
-                    flagMode.toggle()
-                } label: {
-                    let flagButtonImage = flagMode ? "flag.slash.circle" : "flag.circle"
-                    Label(flagButtonLabel, systemImage: flagButtonImage)
-                }
-                .accessibilityIdentifier(flagButtonLabel)
-                .accessibilityLabel(flagButtonLabel)
-            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("GameView")
     }
 }
 
-struct GameView_Previews: PreviewProvider {
-    static let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
-    @State static var grid = factory.makeGrid(for: .beginner)
-    @State static var state: MinesweeperState = .running
+struct GameView_Preview: View {
+    @State var grid: MinesweeperGrid
+    @State var state: MinesweeperState = .running
     
-    static var previews: some View {
+    var body: some View {
         NavigationStack {
             GameView(grid: $grid, state: $state, playAgain: {}, spriteSet: .default) 
         }
     }
+}
+
+#Preview("Game iOS") {
+    let factory = SeededRandomGridFactory(seed: "hakvoort!".data(using: .utf8))
+    let grid = factory.makeGrid(for: .expert)
+    return GameView_Preview(grid: grid)
 }
