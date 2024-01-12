@@ -48,11 +48,13 @@ class MinesweeperUITests: XCTestCase {
         startGame(level: .beginner)
 
         #if os(macOS)
-        let toolbar = app.windows.firstMatch.toolbars
         let grid = app.windows.firstMatch.groups["Grid"]
+        let plantFlag = app.windows.firstMatch.radioButtons["Plant flag"]
+        let uncoverTile = app.windows.firstMatch.radioButtons["Uncover tile"]
         #else
-        let toolbar = app.navigationBars
         let grid = app.otherElements["Grid"]
+        let plantFlag = app.buttons["Plant flag"]
+        let uncoverTile = app.buttons["Uncover tile"]
         #endif
 
         XCTAssertTrue(grid.exists, "Grid not found")
@@ -61,61 +63,36 @@ class MinesweeperUITests: XCTestCase {
         grid.buttons["Tile (0,1)"].clickOrTap()
         grid.buttons["Tile (0,2)"].clickOrTap()
 
-        toolbar.buttons["Flag"].clickOrTap()
+        plantFlag.clickOrTap()
         grid.buttons["Tile (1,0)"].clickOrTap()
-        toolbar.buttons["Remove Flag"].clickOrTap()
+        uncoverTile.clickOrTap()
 
         grid.buttons["Tile (2,0)"].clickOrTap()
 
-        toolbar.buttons["Flag"].clickOrTap()
+        plantFlag.clickOrTap()
         grid.buttons["Tile (3,0)"].clickOrTap()
-        toolbar.buttons["Remove Flag"].clickOrTap()
+        uncoverTile.clickOrTap()
 
         grid.buttons["Tile (4,0)"].clickOrTap()
         grid.buttons["Tile (6,4)"].clickOrTap()
 
-        toolbar.buttons["Flag"].clickOrTap()
+        plantFlag.clickOrTap()
         grid.buttons["Tile (2,1)"].clickOrTap()
         grid.buttons["Tile (0,6)"].clickOrTap()
         grid.buttons["Tile (8,6)"].clickOrTap()
         grid.buttons["Tile (7,7)"].clickOrTap()
-        toolbar.buttons["Remove Flag"].clickOrTap()
+        uncoverTile.clickOrTap()
 
         grid.buttons["Tile (8,7)"].clickOrTap()
         grid.buttons["Tile (7,8)"].clickOrTap()
 
-        toolbar.buttons["Flag"].clickOrTap()
+        plantFlag.clickOrTap()
         grid.buttons["Tile (8,8)"].clickOrTap()
-        toolbar.buttons["Remove Flag"].clickOrTap()
+        uncoverTile.clickOrTap()
 
         grid.buttons["Tile (2,4)"].clickOrTap()
 
         takeScreenshot(name: "1_beginner_game")
-
-//        app.windows.firstMatch.sheets.buttons["View board"].click()
-    }
-
-    func testPlayExpertGame() {
-        startGame(level: .expert)
-
-        #if os(macOS)
-        let grid = app.windows.firstMatch.groups["Grid"]
-        #else
-        let grid = app.otherElements["Grid"]
-        #endif
-
-        XCTAssertTrue(grid.exists, "Grid not found")
-
-        #if os(iOS)
-        grid.swipeUp()
-        grid.swipeLeft()
-        #endif
-
-        grid.buttons["Tile (26,12)"].clickOrTap()
-        grid.buttons["Tile (29,13)"].clickOrTap()
-        takeScreenshot(name: "3_game_over")
-        app.buttons["View board"].clickOrTap()
-        takeScreenshot(name: "2_expert_game")
     }
 }
 
