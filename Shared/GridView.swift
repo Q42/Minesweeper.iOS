@@ -15,7 +15,7 @@ struct GridView: View {
     @Binding var grid: MinesweeperGrid
     @Binding var state: MinesweeperState
     let spriteSet: SpriteSet
-    @Binding var flagMode: Bool
+    @Binding var flagMode: FlagMode
 
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
@@ -38,11 +38,11 @@ struct GridView: View {
                         .accessibilityLabel(tileDescription.localizedDescription)
                         .accessibilityIdentifier("Tile (\(x),\(y))")
                         .accessibilityAction(named: Text("Plaats vlaggen")){
-                            flagMode = true
+                            flagMode = .plantFlag
                             selectTile(x: x, y:y)
                         }
                         .accessibilityAction(named: Text("Verwijder tegel")) {
-                            flagMode = false
+                            flagMode = .uncoverTile
                             selectTile(x: x, y: y)
                         }
                         
@@ -72,9 +72,10 @@ struct GridView: View {
         guard grid.state == .running else { return 0 }
 
         // Perform the user's action
-        if flagMode {
+        switch flagMode {
+        case .plantFlag:
             grid.flagTile(x: x, y: y)
-        } else {
+        case .uncoverTile:
             uncovered = grid.selectTile(x: x, y: y)
             if uncovered > 1
             {
@@ -119,7 +120,7 @@ struct GridView_Previews: PreviewProvider {
 
     @State static var grid = factory.makeGrid(for: .beginner)
     @State static var state: MinesweeperState = .running
-    @State static var flagMode: Bool = false
+    @State static var flagMode: FlagMode = .uncoverTile
     static let tileSize: CGFloat = 30
     static let spriteSet = AssetCatalogSpriteSet("Classic")
 

@@ -19,6 +19,9 @@ struct ThemeView: View {
                     selectedTheme = theme
                 } label: {
                     HStack {
+                        Image(systemName: theme == selectedTheme ? "checkmark" : "")
+                            .frame(width: 44, height: 44, alignment: .center)
+
                         VStack(alignment: .leading) {
                             Text(theme.name)
                                 .foregroundColor(.primary)
@@ -32,11 +35,8 @@ struct ThemeView: View {
                                 }
                             }
                         }
-                        Spacer()
-                        if theme == selectedTheme {
-                            Image(systemName: "checkmark")
-                        }
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
