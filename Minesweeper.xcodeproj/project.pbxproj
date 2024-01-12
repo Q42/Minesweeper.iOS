@@ -134,6 +134,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D5753F152B516BD4008773BA /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */,
+				D5AC8C77294C7E0000D7C094 /* Info.plist */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
 		D589B49E2927AB7500A7FC24 = {
 			isa = PBXGroup;
 			children = (
@@ -165,14 +174,13 @@
 		D589B4A92927AB7500A7FC24 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
-				D5AC8C77294C7E0000D7C094 /* Info.plist */,
 				D589B4AA2927AB7500A7FC24 /* MinesweeperApp.swift */,
 				D5B93F2129CDF47900B83B9B /* ThemeView.swift */,
 				D5F5A9A2298400B3001C2A0E /* CustomGameForm.swift */,
 				D589B4AC2927AB7500A7FC24 /* GameView.swift */,
 				85AA138C29CDF78D0010D71D /* StatusView.swift */,
 				D5BD657629322EDE00247DDE /* SeededRandomGridFactory.swift */,
-				D589B4B02927AB7600A7FC24 /* Minesweeper.entitlements */,
+				D5753F152B516BD4008773BA /* Supporting files */,
 				D589B4B12927AB7600A7FC24 /* Preview Content */,
 			);
 			path = Minesweeper;
